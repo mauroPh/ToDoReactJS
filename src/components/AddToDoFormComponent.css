@@ -1,0 +1,26 @@
+.add-todo-form {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  background-color: #d5e0e7;
+  border-radius: 20px;
+  }
+  
+  .add-todo-form input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    padding: 8px,16px ;
+    width: 80%;
+    height: 40px;
+    box-shadow: 0 0 0 0 rgba(16, 113, 117, 0.4);
+    transition: box-shadow 0.3s ease;  
+  }
+
+  .add-todo-form input[type="text"]:focus,
+.add-todo-form input[type="text"]:valid {
+  box-shadow: 0 0 0px 0 rgba(16, 113, 117, 0.4);
+}
+ 

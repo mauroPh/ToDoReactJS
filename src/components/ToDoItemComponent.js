@@ -9,7 +9,7 @@ function ToDoItemComponent(props) {
         onChange={() => props.handleCheckboxChange(props.id)}
         />
       
-        <p>{props.text ? props.text : "Texto indisponível"}</p>
+        <p>{props.description ? props.description : "Texto indisponível"}</p>
 
 
         <button className = "delete-button" onClick={() => props.handleDelete(props.id)}>Delete</button>
