@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from './App';
+import ToDoView from './Pages/ToDo/ToDoView';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
@@ -13,6 +14,8 @@ createRoot(rootElement).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/teste" element={<p1>Teste</p1>} />
+        <Route path="/todo" element={<ToDoView />} />
+
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

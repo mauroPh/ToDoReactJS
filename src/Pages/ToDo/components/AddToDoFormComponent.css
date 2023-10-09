@@ -4,13 +4,11 @@
   left: 0;
   width: 100%;
   padding: 16px;
-  background-color: #d5e0e7;
-  border-radius: 20px;
-  }
+  background-color: rgb(236, 235, 235);  }
   
   .add-todo-form input[type="text"] {
     border: 1px solid #ccc;
-    border-radius: 20px;
+    border-radius: 10px;
     font-size: 16px;
     padding: 8px,16px ;
     width: 80%;
