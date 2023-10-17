@@ -1,23 +1,24 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
-import ToDoView from './Pages/ToDo/ToDoView';
 import './index.css';
+import LoginPage from './pages/login/LoginPage.jsx';
+import ToDoPage from './pages/toDo/ToDoPage.jsx';
 import reportWebVitals from './reportWebVitals';
 
-const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-createRoot(rootElement).render(
+root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/teste" element={<p1>Teste</p1>} />
-        <Route path="/todo" element={<ToDoView />} />
-
-      </Routes>
-    </BrowserRouter>
+    
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/todo" element={<ToDoPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </BrowserRouter>
   </React.StrictMode>
 );
 

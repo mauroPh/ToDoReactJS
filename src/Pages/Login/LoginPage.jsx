@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import mario from '../../assets/lista-de-afazeres.png';
+import { Navigate } from "react-router-dom";
+import iconToDo from '../../assets/lista-de-afazeres.png';
 import "./Login.css";
+import { getToken } from "./LoginRepository";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameLabelPosition, setUsernameLabelPosition] = useState("top");
   const [passwordLabelPosition, setPasswordLabelPosition] = useState("top");
+  const [redirectToToDoPage, setRedirectToToDoPage] = useState(false);
 
   const handleUsernameChange = (event) => {
     const value = event.target.value;
@@ -20,12 +23,15 @@ function Login() {
     setPasswordLabelPosition(value ? "floating" : "top");
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Username:", username);
-    console.log("Password:", password);
-    // Adicione aqui a lógica para autenticar o usuário
+    await getToken(username, password);
+    setRedirectToToDoPage(true);
   };
+
+  if (redirectToToDoPage) {
+    return <Navigate to="/todo" />;
+  }
 
   return (
     <div className="login-container">
@@ -60,7 +66,7 @@ function Login() {
           <button type="submit" className="login-button">Acessar</button>
         </div>
 
-        <img src={mario} alt="Minha Imagem" className='imagem-fixa'/>
+        <img src={iconToDo} alt="Minha Imagem" className='imagem-fixa'/>
       </form>
     </div>
   );

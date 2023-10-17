@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+import AddTodoFormComponent from "../../components/AddToDoFormComponent";
+import ToDoListComponent from "../../components/ToDoListComponent";
 import "./ToDo.css";
-import AddTodoFormComponent from "./components/AddToDoFormComponent";
-import ToDoListComponent from "./components/ToDoListComponent";
-import { addTask, deleteTask, getAllTasks, updateTask } from "./repositories/ToDoRepository";
+import { addTodo, getAllTodos, updateTodo } from "./ToDoRepository";
 
-function ToDoView() {
+function ToDoPage() {
   const [todos, setTodos] = useState([]);
   const [formText, setFormText] = useState("");
 
@@ -14,7 +14,8 @@ function ToDoView() {
 
   async function fetchTodos() {
     try {
-      const todosFromAPI = await getAllTasks();
+      const todosFromAPI = await getAllTodos();
+      console.log('fetchTodos ', todosFromAPI);
       setTodos(todosFromAPI);
     } catch (error) {
       console.error(error);
@@ -23,7 +24,7 @@ function ToDoView() {
 
   async function deleteTodo(id) {
     try {
-      await deleteTask(id);
+      await deleteTodo(id);
       const updatedTodos = todos.filter((todo) => todo.id !== id);
       setTodos(updatedTodos);
     } catch (error) {
@@ -35,7 +36,7 @@ function ToDoView() {
     try {
       const todoToUpdate = todos.find((todo) => todo.id === id);
       const updatedTodo = { ...todoToUpdate, completed: !todoToUpdate.completed };
-      await updateTask(id, updatedTodo);
+      await updateTodo(id, updatedTodo);
       const updatedTodos = todos.map((todo) => (todo.id === id ? updatedTodo : todo));
       setTodos(updatedTodos);
     } catch (error) {
@@ -45,8 +46,7 @@ function ToDoView() {
 
   async function addNewTodo(task) {
     try {
-    console.log('app', task);
-      const newTodo = await addTask(task);
+      const newTodo = await addTodo(task);
       setTodos((todos) => [...todos, newTodo]);
     } catch (error) {
       console.error(error);
@@ -59,15 +59,14 @@ function ToDoView() {
     <div className="App">
       <h1 className="title">To-Do App</h1>
 
-      <p1>"Teste"</p1>
       <ToDoListComponent
         todos={todos}
         handleCheckboxChange={updateTodoStatus}
         handleDelete={deleteTodo}
       />
-      <AddTodoFormComponent onAddTodo={addNewTodo} setFormText={setFormText} />
+    <AddTodoFormComponent  setFormText={setFormText} />
     </div>
   );
 }
 
-export default ToDoView;
+export default ToDoPage;
