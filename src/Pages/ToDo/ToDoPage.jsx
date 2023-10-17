@@ -3,7 +3,8 @@ import AddTodoFormComponent from "../../components/AddToDoFormComponent";
 import ToDoListComponent from "../../components/ToDoListComponent";
 import "./ToDo.css";
 import { getAllTodos } from "./ToDoRepository";
-
+import Header from "../../components/Header/header";
+;
 function ToDoPage() {
   const [todos, setTodos] = useState([]);
   const [formText, setFormText] = useState("");
@@ -41,7 +42,10 @@ function ToDoPage() {
   }
 
   return (
+    <div>
+         <Header />
     <div className="App">
+    
       <h1 className="title">To-Do App</h1>
 
       <ToDoListComponent
@@ -50,6 +54,7 @@ function ToDoPage() {
         handleDelete={deleteTodo}
       />
     <AddTodoFormComponent  setFormText={setFormText} />
+    </div>
     </div>
   );
 }
