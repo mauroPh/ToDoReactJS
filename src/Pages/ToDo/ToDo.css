@@ -123,4 +123,12 @@
     transition: background-color 0.3s ease;
     text-decoration: line-through;
   }
+ 
+  .not-found-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+  }
   

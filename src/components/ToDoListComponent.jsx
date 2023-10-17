@@ -1,22 +1,27 @@
-import React from 'react';
-import TodoItem from './ToDoItemComponent';
+import React from "react";
+import TodoItemComponent from "./ToDoItemComponent";
+
 function TodoList(props) {
-  if (!props.todos) {
-    return null;
+  const { todos, handleCheckboxChange, handleDelete } = props;
+
+
+  if (!Array.isArray(todos)) {
+    return <p className="not-found-label">Nenhuma tarefa pendente</p>;
   }
+
   return (
-    <div className="todo-list">
-      {props.todos.map(todo => (
-        <TodoItem
-          key={todo.id}
-          id={todo.id}
-          description={todo.description}
-          completed={todo.completed}
-          handleCheckboxChange={props.handleCheckboxChange}
-          handleDelete={props.handleDelete}
-        />
-      ))}
-    </div>
+    <ul>
+  {todos.map((todo) => {
+  return (
+    <TodoItemComponent
+      key={todo.id}
+      todo={todo}
+      handleCheckboxChange={handleCheckboxChange}
+      handleDelete={handleDelete}
+    />
+  );
+})}
+    </ul>
   );
 }
 
