@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import AddTodoFormComponent from "../../components/AddToDoFormComponent";
-import ToDoListComponent from "../../components/ToDoListComponent";
+import ToDoItemComponent from "../../components/ToDoItemComponent";
 import "./ToDo.css";
-import { addTodo, getAllTodos } from "./ToDoRepository";
+import { addTodo, deleteTodo, getAllTodos } from "./ToDoRepository";
 
 function ToDoPage() {
   const [todos, setTodos,] = useState([]);
@@ -46,21 +46,31 @@ function ToDoPage() {
     setTodos(updatedTodos);
   }
 
-  function deleteTodo (id) {
-    const updatedTodos = todos.filter((todo) => todo.id !== id);
-    setTodos(updatedTodos);
+  async function handleDelete(id) {
+    try {
+      await deleteTodo(id);
+      fetchTodos();
+    } catch (error) {
+      console.error(error);
+    }
   }
-
   
 
   return (  
     <div className="App">
       <h1 className="title">To-Do App</h1>
-      <ToDoListComponent
-        todos={todos}
-        handleCheckboxChange={updateTodoStatus}
-        handleDelete={deleteTodo}
-      />
+    
+      <ul>
+        {todos.map((todo) => (
+          <ToDoItemComponent
+            key={todo.id}
+            todo={todo}
+            handleCheckboxChange={updateTodoStatus}
+            handleDelete={handleDelete}
+            fetchTodos={fetchTodos}
+          />
+        ))}
+      </ul>
       <AddTodoFormComponent saveTodo={handleAddTodo} />
     </div>
   );
