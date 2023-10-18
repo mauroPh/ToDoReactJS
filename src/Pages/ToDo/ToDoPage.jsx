@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import AddTodoFormComponent from "../../components/AddToDoFormComponent";
 import ToDoListComponent from "../../components/ToDoListComponent";
 import "./ToDo.css";
-import { getAllTodos } from "./ToDoRepository";
-import Header from "../../components/Header/header";
-;
+import { addTodo, getAllTodos } from "./ToDoRepository";
+
 function ToDoPage() {
-  const [todos, setTodos] = useState([]);
-  const [formText, setFormText] = useState("");
+  const [todos, setTodos,] = useState([]);
+  const [reloadAdd, setReloadAdd] = useState([]); //adicionei um novo estado para armazenar a lista atualizada de tarefas
   
   
   async function fetchTodos() {
@@ -24,7 +23,18 @@ function ToDoPage() {
 
   useEffect(() => {
     fetchTodos();
-  }, []);
+    setTodos(reloadAdd); // passo a atualizar  o estado da lista de tarefas
+  }, [reloadAdd]);
+
+
+  async function handleAddTodo(todo) {
+    try {
+      const newTodo = await addTodo(todo);
+      setReloadAdd([...todos, newTodo]); // atualizo o estado com a lista atualizada de tarefas
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   function updateTodoStatus(id, completed) {
     const updatedTodos = todos.map((todo) => {
@@ -41,20 +51,17 @@ function ToDoPage() {
     setTodos(updatedTodos);
   }
 
-  return (
-    <div>
-         <Header />
-    <div className="App">
-    
-      <h1 className="title">To-Do App</h1>
+  
 
+  return (  
+    <div className="App">
+      <h1 className="title">To-Do App</h1>
       <ToDoListComponent
         todos={todos}
         handleCheckboxChange={updateTodoStatus}
         handleDelete={deleteTodo}
       />
-    <AddTodoFormComponent  setFormText={setFormText} />
-    </div>
+      <AddTodoFormComponent saveTodo={handleAddTodo} />
     </div>
   );
 }

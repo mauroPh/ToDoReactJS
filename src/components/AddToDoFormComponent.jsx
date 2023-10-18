@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
 import './AddToDoFormComponent.css';
 
-
-function AddTodoFormComponent({ onAddTodo }) {
+function AddTodoFormComponent(props) {
+  const { saveTodo,  } = props;
   const [todoText, setTodoText] = useState('');
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       console.log('Enter key pressed', todoText.trim());
-      saveTodo();
-    }
-  };
-
-  const saveTodo = () => {
-    if (todoText.trim()) {
-      onAddTodo({
+      saveTodo({
         description: todoText.trim(),
         completed: false,
       });
