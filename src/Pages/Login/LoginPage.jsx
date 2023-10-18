@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import iconToDo from '../../assets/lista-de-afazeres.png';
 import "./Login.css";
 import { getToken } from "./LoginRepository";
@@ -10,6 +10,11 @@ function Login() {
   const [usernameLabelPosition, setUsernameLabelPosition] = useState("top");
   const [passwordLabelPosition, setPasswordLabelPosition] = useState("top");
   const [redirectToToDoPage, setRedirectToToDoPage] = useState(false);
+
+  const history = useNavigate();
+  const handleRegister = () => {
+    history('/register');
+};
 
   const handleUsernameChange = (event) => {
     const value = event.target.value;
@@ -62,7 +67,7 @@ function Login() {
         <div className='button-containner'>
           <div className='button-separator'></div>
 
-          <button type="submit" className="register-button">Criar conta</button>
+          <button type="submit" className="register-button" onClick={handleRegister}>Criar conta</button>
           <button type="submit" className="login-button">Acessar</button>
         </div>
 
