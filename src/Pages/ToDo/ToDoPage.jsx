@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import AddTodoFormComponent from "../../components/AddToDoFormComponent";
 import ToDoItemComponent from "../../components/ToDoItemComponent";
 import "./ToDo.css";
-import { addTodo, deleteTodo, getAllTodos } from "./ToDoRepository";
+import { addTodo, deleteTodo, getAllTodos,updateTodo } from "./ToDoRepository";
+import Header from "../../components/Header/header";
 
 function ToDoPage() {
   const [todos, setTodos,] = useState([]);
@@ -46,6 +47,15 @@ function ToDoPage() {
     setTodos(updatedTodos);
   }
 
+  async function handleUpdate(id, updatedTodo) {
+    try {
+      await updateTodo(id, updatedTodo);
+      setReloadAdd([...todos]); // atualiza a lista de tarefas
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async function handleDelete(id) {
     try {
       await deleteTodo(id);
@@ -57,9 +67,10 @@ function ToDoPage() {
   
 
   return (  
+    <div>
+    <Header />
     <div className="App">
       <h1 className="title">To-Do App</h1>
-    
       <ul>
         {todos.map((todo) => (
           <ToDoItemComponent
@@ -67,11 +78,13 @@ function ToDoPage() {
             todo={todo}
             handleCheckboxChange={updateTodoStatus}
             handleDelete={handleDelete}
+            handleUpdate={handleUpdate}
             fetchTodos={fetchTodos}
           />
         ))}
       </ul>
       <AddTodoFormComponent saveTodo={handleAddTodo} />
+    </div>
     </div>
   );
 }
