@@ -7,7 +7,7 @@ import './header.css';
 const Header = ({ userEmail }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const user = {
-    email: localStorage.getItem('email') || "usuario@gmail.com",
+    email: localStorage.getItem('email'),
   };
 
   const history = useNavigate();
