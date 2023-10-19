@@ -40,14 +40,11 @@ function ToDoPage() {
     }
   }
 
-  function updateTodoStatus(id, completed) {
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, completed };
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
+  async function handleCheckboxChange(todoId) {
+    const todo = todos.find((t) => t.todoId === todoId);
+    todo.completed = !todo.completed;
+    await updateTodo(todoId, todo);
+    fetchTodos();
   }
 
   async function handleUpdate(id, updatedTodo) {
@@ -79,7 +76,7 @@ function ToDoPage() {
           <ToDoItemComponent
             key={todo.id}
             todo={todo}
-            handleCheckboxChange={updateTodoStatus}
+            handleCheckboxChange={handleCheckboxChange}
             handleDelete={handleDelete}
             handleUpdate={handleUpdate}
             fetchTodos={fetchTodos}

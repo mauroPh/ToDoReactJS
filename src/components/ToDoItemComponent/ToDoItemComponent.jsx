@@ -62,7 +62,7 @@ function ToDoItemComponent(props) {
           <input
             type="checkbox"
             checked={props.todo.completed}
-            onChange={() => props.handleCheckboxChange(props.todo.id)}
+            onChange={() => props.handleCheckboxChange(props.todo.todoId, !props.todo.complete)}
           />
           <label
             className={props.todo.completed ? "todo-label todo-label-completed" : "todo-label"}
