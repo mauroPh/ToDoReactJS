@@ -5,10 +5,13 @@ import "./ToDo.css";
 import { addTodo, deleteTodo, getAllTodos,updateTodo } from "./ToDoRepository";
 import Header from "../../components/Header/header";
 
+
+
 function ToDoPage() {
   const [todos, setTodos,] = useState([]);
   const [reloadAdd, setReloadAdd] = useState([]); //adicionei um novo estado para armazenar a lista atualizada de tarefas
   
+
   
   async function fetchTodos() {
     try {
@@ -64,14 +67,14 @@ function ToDoPage() {
       console.error(error);
     }
   }
-  
 
+  
   return (  
     <div>
-    <Header />
+    <Header/>
+    
     <div className="App">
-      <h1 className="title">To-Do App</h1>
-      <ul>
+      <ul className="todo-list">
         {todos.map((todo) => (
           <ToDoItemComponent
             key={todo.id}
@@ -84,6 +87,7 @@ function ToDoPage() {
         ))}
       </ul>
       <AddTodoFormComponent saveTodo={handleAddTodo} />
+     
     </div>
     </div>
   );

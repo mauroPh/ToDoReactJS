@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { deleteTodo } from "../Pages/ToDo/ToDoRepository";
+import Icon from '@mdi/react';
+import { mdiClose, mdiDeleteOutline, mdiPencilBoxOutline } from '@mdi/js';
+
 
 function ToDoItemComponent(props) {
   console.log("ToDoItemComponent props:", props);
@@ -37,7 +40,7 @@ function ToDoItemComponent(props) {
             onChange={(event) => setUpdatedTodoText(event.target.value)}
           />
           <button onClick={handleUpdate}>Salvar</button>
-          <button onClick={handleCancel}>Cancelar</button>
+          <button onClick={handleCancel}><Icon path={mdiClose} size={1} /></button>
         </>
       ) : (
         <>
@@ -50,10 +53,10 @@ function ToDoItemComponent(props) {
       <label className={props.completed ? "todo-label todo-label-completed" : "todo-label"}>
         {props.todo.description}
       </label>
-      <button onClick={() => setIsEditing(true)}>Editar</button>
+      <button onClick={() => setIsEditing(true)}><Icon path={mdiPencilBoxOutline} size={1.6} /></button>
       <button className={ props.completed ? "delete-button delete-button-completed" : "delete-button"}
         onClick={handleDelete}>
-        Remover
+        <Icon path={mdiDeleteOutline} size={1} />
       </button>
       </>
       )}

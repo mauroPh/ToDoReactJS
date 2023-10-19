@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import iconToDo from '../../assets/lista-de-afazeres.png';
 import "./Register.css";
+import { getToken, getUserInfo } from "../Login/LoginRepository";
 
 
 function Register() {
@@ -9,9 +10,13 @@ function Register() {
     const [password, setPassword] = useState("");
     const [usernameLabelPosition, setUsernameLabelPosition] = useState("top");
     const [passwordLabelPosition, setPasswordLabelPosition] = useState("top");
-    // const [redirectToToDoPage, setRedirectToToDoPage] = useState(false);
+    const [redirectToToDoPage, setRedirectToToDoPage] = useState(false);
   
     const history = useNavigate();
+
+    const handleBackLogin = () => {
+      history('/');
+  } 
 
     const handleUsernameChange = (event) => {
       const value = event.target.value;
@@ -27,22 +32,15 @@ function Register() {
   
     const handleSubmit = async (event) => {
       event.preventDefault();
-
-    //   await getToken(username, password);
-    //   setRedirectToToDoPage(true);
-
+      await getUserInfo(username, password);
+      setRedirectToToDoPage(true);
    
     };
 
-    const handleBackLogin = () => {
-        history('/');
-    }
-
-    
   
-    // if (redirectToToDoPage) {
-    //   return <Navigate to="/todo" />;
-    // }
+    if (redirectToToDoPage) {
+      return <Navigate to="/todo" />;
+    }
   
     return (
       <div className="login-container">

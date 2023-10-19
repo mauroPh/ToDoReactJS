@@ -1,59 +1,91 @@
 .header {
-        display: flex;
-        justify-content: start;
-        align-items: flex-start;
-        flex-direction: row;
-    }
-    
-    
-    .menu {
-        position: relative;
-        cursor: pointer;
-    }
-    
-    .hamburger {
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
-    }
-    
-    .line {
-        width: 25px;
-        height: 3px;
-        background-color: #333;
-        margin: 3px 0;
-        transition: all 0.3s ease;
-    }
-    
-    .line-1 {
-        transform: rotate(-45deg) translate(-5px, 6px);
-    }
-    
-    .line-2 {
-        opacity: 0;
-    }
-    
-    .line-3 {
-        transform: rotate(45deg) translate(-5px, -6px);
-    }
-    
-    .user-info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 20px;
-    }
-    
-    .delete-button {
-        margin-top: 10px;
-        padding: 10px 20px;
-        background-color: red;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    
-    .delete-button:hover {
-        background-color: darkred;
-    }
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    z-index: 3;
+    align-content: center;
+
+}
+
+.header.open:after {
+    content: "";
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, .5);
+    position: absolute;
+    z-index: 3;
+    top: 0;
+}
+
+.header h1 {
+    width: 100%;
+    text-align: center;
+    margin-right: 57px;
+}
+
+.menu {
+    position: relative;
+    cursor: pointer;
+    margin: 24px;
+    background-color: #eee !important;
+    padding: 8px;
+    border-radius: 6px;
+    z-index: 4;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.line {
+    width: 25px;
+    height: 3px;
+    background-color: #c2c2c2;
+    margin: 3px 0;
+    transition: all 0.3s ease;
+}
+
+.line-1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.line-2 {
+    opacity: 0;
+}
+
+.line-3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    position: absolute;
+    top:0;
+    left: calc(25px + 40px);
+    background: rgb(255 255 255 / 59%);
+    padding: 10px 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 2px 3px 1px rgba(0, 0, 0, .2);
+    z-index: 4;
+}
+
+.delete-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: darkred;
+}

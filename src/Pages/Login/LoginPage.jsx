@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import iconToDo from '../../assets/lista-de-afazeres.png';
 import "./Login.css";
-import { getToken } from "./LoginRepository";
+import { getUserInfo } from "./LoginRepository";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -30,7 +30,7 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await getToken(username, password);
+    await getUserInfo(username, password);
     setRedirectToToDoPage(true);
   };
 
