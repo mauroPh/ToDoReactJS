@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import iconToDo from '../../assets/lista-de-afazeres.png';
 import "./Register.css";
-import { getToken, getUserInfo } from "../Login/LoginRepository";
+import {  getUserInfo } from "../Login/LoginRepository";
+// getToken,
 
 
 function Register() {

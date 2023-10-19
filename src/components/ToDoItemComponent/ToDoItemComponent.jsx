@@ -2,7 +2,7 @@ import { mdiClose } from '@mdi/js';
 import Icon from '@mdi/react';
 import React, { useState } from "react";
 import { deleteTodo } from "../../Pages/ToDo/ToDoRepository";
-import "./ToDoItemComponent.css";
+import "./ToDoItemComponent.css"
 
 
 
@@ -47,16 +47,18 @@ function ToDoItemComponent(props) {
     <div className={props.todo.completed ? "todo-item todo-item-completed" : "todo-item"}>
       {isEditing ? (
         <div className="popup">
-          <div className="popup-content">
-            <textarea
-              value={updatedTodoText}
-              onChange={(event) => setUpdatedTodoText(event.target.value)}
-              onKeyDown={handleKeyDown}
-            />
-            <button onClick={handleUpdate}>Salvar</button>
-            <button onClick={handleCancel}><Icon path={mdiClose} size={1} /></button>
+        <div className="popup-content">
+          <textarea
+            value={updatedTodoText}
+            onChange={(event) => setUpdatedTodoText(event.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          <div className="button-container">
+            <button className="popup-content button" onClick={handleUpdate}>Salvar</button>
+            <button className="popup-content button" onClick={handleCancel}><Icon path={mdiClose} size={1} /></button>
           </div>
         </div>
+      </div>
       ) : (
         <>
           <input
