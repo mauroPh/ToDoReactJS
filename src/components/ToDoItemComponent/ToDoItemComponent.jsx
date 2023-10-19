@@ -1,7 +1,9 @@
-import { mdiClose, mdiDeleteOutline } from '@mdi/js';
+import { mdiClose } from '@mdi/js';
 import Icon from '@mdi/react';
 import React, { useState } from "react";
-import { deleteTodo } from "../Pages/ToDo/ToDoRepository";
+import { deleteTodo } from "../../Pages/ToDo/ToDoRepository";
+import "./ToDoItemComponent.css";
+
 
 
 function ToDoItemComponent(props) {
@@ -42,7 +44,7 @@ function ToDoItemComponent(props) {
   };
 
   return (
-    <div className={props.completed ? "todo-item todo-item-completed" : "todo-item"}>
+    <div className={props.todo.completed ? "todo-item todo-item-completed" : "todo-item"}>
       {isEditing ? (
         <div className="popup">
           <div className="popup-content">
@@ -59,17 +61,18 @@ function ToDoItemComponent(props) {
         <>
           <input
             type="checkbox"
-            checked={props.completed}
-            onChange={() => props.handleCheckboxChange(props.id)}
+            checked={props.todo.completed}
+            onChange={() => props.handleCheckboxChange(props.todo.id)}
           />
           <label
-            className={props.completed ? "todo-label todo-label-completed" : "todo-label"}
+            className={props.todo.completed ? "todo-label todo-label-completed" : "todo-label"}
             onClick={handleDescriptionClick}
           >
             {props.todo.description}
           </label>
-          <button className={props.completed ? "delete-button delete-button-completed" : "delete-button"} onClick={handleDelete}>
-            <Icon path={mdiDeleteOutline} size={1} />
+          <button className={props.todo.completed ? "delete-button delete-button-completed" : "delete-button"} onClick={handleDelete}>
+            <Icon path={mdiClose} size={0.8} />
+            
           </button>
         </>
       )}

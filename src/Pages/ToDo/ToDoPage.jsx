@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import AddTodoFormComponent from "../../components/AddToDoFormComponent";
-import ToDoItemComponent from "../../components/ToDoItemComponent";
-import "./ToDo.css";
-import { addTodo, deleteTodo, getAllTodos,updateTodo } from "./ToDoRepository";
+import AddTodoFormComponent from "../../components/AddToDoFormComponent/AddToDoFormComponent";
 import Header from "../../components/Header/header";
+import ToDoItemComponent from "../../components/ToDoItemComponent/ToDoItemComponent";
+import "./ToDo.css";
+import { addTodo, deleteTodo, getAllTodos, updateTodo } from "./ToDoRepository";
 
 
 

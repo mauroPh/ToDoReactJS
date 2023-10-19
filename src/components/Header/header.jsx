@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/auth";
-import './header.css';
 import AlertDialog from '../ConfirmDiolog/ConfirmDiolog';
+import './header.css';
 
 const Header = ({ userEmail }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -15,10 +15,9 @@ const Header = ({ userEmail }) => {
     history('/');
 };
 
-  const handleDeleteAccount = () => {
-    // Adicione aqui a lógica para deletar a conta
-    console.log('Conta deletada');
-  };
+  // const handleDeleteAccount = () => {
+  //   console.log('Conta deletada');
+  // };
 
   function handleLogout() {
     logout();
@@ -38,8 +37,8 @@ const Header = ({ userEmail }) => {
       {isMenuOpen && (
         <div className="user-info">
           <p>{user.email}</p>
-          <button className="" onClick={handleLogout}>Logout</button>
-          <button onClick={() => AlertDialog()} className="delete-button">Deletar Conta</button>
+          <button className="register-button" onClick={handleLogout}>Logout</button>
+          <button onClick={() => AlertDialog()} className="login-button">Deletar Conta</button>
          
         </div>
       )}
