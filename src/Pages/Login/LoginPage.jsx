@@ -28,11 +28,23 @@ function Login() {
     setPasswordLabelPosition(value ? "floating" : "top");
   };
 
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   await getUserInfo(username, password);
+  //   setRedirectToToDoPage(true);
+  // };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await getUserInfo(username, password);
-    setRedirectToToDoPage(true);
+    const token = await getUserInfo(username, password); 
+    if (token) {
+      localStorage.setItem('token', token); 
+      setRedirectToToDoPage(true); 
+    }
   };
+
+
+  
 
   if (redirectToToDoPage) {
     return <Navigate to="/todo" />;

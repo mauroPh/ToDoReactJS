@@ -4,12 +4,13 @@ import Header from "../../components/Header/header";
 import ToDoItemComponent from "../../components/ToDoItemComponent/ToDoItemComponent";
 import "./ToDo.css";
 import { addTodo, deleteTodo, getAllTodos, updateTodo } from "./ToDoRepository";
-
+import { useNavigate } from "react-router-dom";
 
 
 function ToDoPage() {
   const [todos, setTodos,] = useState([]);
   const [reloadAdd, setReloadAdd] = useState([]); //adicionei um novo estado para armazenar a lista atualizada de tarefas
+  const navigate = useNavigate();
   
 
   
@@ -64,6 +65,9 @@ function ToDoPage() {
       console.error(error);
     }
   }
+  const handleCreateUser = () => {
+    navigate("/register");
+  };
 
   
   return (  
@@ -71,6 +75,11 @@ function ToDoPage() {
     <Header/>
     
     <div className="App">
+    <div className="button-container">
+    <button onClick={handleCreateUser} className="create-user-button">
+          Criar Novo Usuário
+        </button>
+        </div>
       <ul className="todo-list">
         {todos.map((todo) => (
           <ToDoItemComponent

@@ -1,84 +1,64 @@
 import React, { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
-import iconToDo from '../../assets/lista-de-afazeres.png';
-import "./Register.css";
-import { createUser } from "./RegisterRepository"; 
+import { useNavigate } from "react-router-dom";
+import { createUser } from "./RegisterRepository";
 
 function RegisterPage() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameLabelPosition, setUsernameLabelPosition] = useState("top");
-  const [passwordLabelPosition, setPasswordLabelPosition] = useState("top");
-  const [redirectToToDoPage, setRedirectToToDoPage] = useState(false);
+  const [profile, setProfile] = useState("perfil1"); // Use um estado para armazenar o perfil selecionado
+  const navigate = useNavigate();
 
-  const history = useNavigate();
-
-  const handleBackLogin = () => {
-    history('/');
-  }
-
-  const handleUsernameChange = (event) => {
-    const value = event.target.value;
-    setUsername(value);
-    setUsernameLabelPosition(value ? "floating" : "top");
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
-    const value = event.target.value;
-    setPassword(value);
-    setPasswordLabelPosition(value ? "floating" : "top");
+    setPassword(event.target.value);
   };
 
-  const handleSubmit = async () => {
-    const response = await createUser(username, password);
+  const handleProfileChange = (event) => {
+    setProfile(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      if (response) {
-        setRedirectToToDoPage(true);
+      const user = await createUser(email, password, profile);
+      if (user) {
+        localStorage.setItem("token", user.token);
+        localStorage.setItem("email", user.username);
+        navigate("/");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Erro no registro: ", error);
     }
-  }
-  
-  
-
-  if (redirectToToDoPage) {
-    return <Navigate to="/login" />;
-  }
+  };
 
   return (
-    <div className="login-container">
-      <p>To-Do App</p>
-      <h1 className="login-title">Faça seu cadastro</h1>
+    <div className="register-container">
+      <h1 className="register-title">Criar Conta</h1>
       <form onSubmit={handleSubmit}>
-        <label className={`label-${usernameLabelPosition}`}>
+        <label>
           E-mail:
-          <input
-            type="text"
-            value={username}
-            onChange={handleUsernameChange}
-          />
+          <input type="text" value={email} onChange={handleEmailChange} />
         </label>
-        <label className={`label-${passwordLabelPosition}`}>
+        <label>
           Senha:
-          <input
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
+          <input type="password" value={password} onChange={handlePasswordChange} />
         </label>
-
-        <div className='button-containner'>
-          <div className='button-separator'></div>
-
-          <button type="submit" className="login-button" onClick={handleSubmit}>Criar conta</button>
-          <button type="submit" className="login-button" onClick={handleBackLogin}>Voltar</button>
-        </div>
-
-        <img src={iconToDo} alt="Minha Imagem" className='imagem-fixa'/>
+        <label>
+          Perfil:
+          <select value={profile} onChange={handleProfileChange}>
+            <option value="perfil1">Perfil 1</option>
+            <option value="perfil2">Perfil 2</option>
+            {/* Adicione opções para outros perfis conforme necessário */}
+          </select>
+        </label>
+        <button type="submit">Criar Conta</button>
       </form>
     </div>
   );
 }
 
 export default RegisterPage;
+

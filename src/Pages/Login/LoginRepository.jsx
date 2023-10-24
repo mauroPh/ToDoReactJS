@@ -17,11 +17,12 @@ api.interceptors.request.use(
   }
 );
 
-async function getUserInfo(email, password) {
+async function getUserInfo(email, password, profileId) {
   try {
     const response = await api.post('/token/generate-token', {
       email: email,
-      password: password
+      password: password,
+      profileId: profileId,
     });
     console.log("getUserInfo ", response.data);
     localStorage.setItem('token', response.data.result.token);
@@ -31,6 +32,7 @@ async function getUserInfo(email, password) {
     console.error(error);
   }
 }
+
 
 
 export {

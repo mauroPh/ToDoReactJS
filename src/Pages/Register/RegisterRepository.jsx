@@ -1,39 +1,37 @@
-import axios from 'axios';
-import {api} from '../Login/LoginRepository';
+import { api } from "../Login/LoginRepository";
 
-// const api = axios.create({
-//   baseURL: 'http://localhost:8080/api',
-// });
-
-
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+async function createUser(email, password, profile, token) {
+    try {
+      const response = await api.post("/users/create", {
+        email: email,
+        password: password,
+        profile: profile,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      });
+      
+      
+      if (response.status === 201) {
+        console.log("createUser ", response.data);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("email", response.data.username);
+        return response.data; 
+      } else {
+        
+        console.error("Erro ao criar usuário: ", response);
+        throw new Error("Erro ao criar usuário");
+      }
+    } catch (error) {
+      console.error("Erro na solicitação createUser:", error);
+      
+      throw error;
     }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
   }
-);
+  
+  export { createUser };
 
-async function createUser(email, password, description) {
-  try {
-    const response = await api.post('/user/create', {
-      email: email,
-      password: password,
-      description: description
-    }, { withCredentials: true });
-    console.log("createUser ", response.data);
-    localStorage.setItem('token', response.data.result.token);
-    localStorage.setItem('email', response.data.result.username);
-    return response.data.result.token;
-  } catch (error) {
-    console.error(error);
-  }
-}
 
-export { createUser };
+
 

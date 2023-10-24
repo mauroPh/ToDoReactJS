@@ -1,4 +1,4 @@
-body {
+/* body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -100,10 +100,10 @@ font-size: smaller;
     padding: 8px 16px;
     font-size: 12px;
     font-weight: 600;
-    cursor: pointer;
+    cursor: pointer; */
     /* transition: background-color 0.3s ease; */
 
-  }
+  /* }
   .text-display-medium{
     font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
   font-size: smaller;
@@ -117,4 +117,4 @@ font-size: smaller;
   width: 40px;
   height: 40px;
   
-}
+} */
