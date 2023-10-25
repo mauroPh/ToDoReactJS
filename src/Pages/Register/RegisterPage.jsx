@@ -5,7 +5,7 @@ import { createUser } from "./RegisterRepository";
 function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [profile, setProfile] = useState("perfil1"); // Use um estado para armazenar o perfil selecionado
+  const [profile, setProfile] = useState("684fd078-c7ba-4204-a133-1546f61ebda9");
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
@@ -61,4 +61,3 @@ function RegisterPage() {
 }
 
 export default RegisterPage;
-
