@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { logout } from "../../services/auth";
-import AlertDialog from '../ConfirmDiolog/ConfirmDiolog';
 import './header.css';
 
 const Header = ({ userEmail }) => {
@@ -9,6 +8,8 @@ const Header = ({ userEmail }) => {
   const user = {
     email: localStorage.getItem('email'),
   };
+  const navigate = useNavigate();
+  const backNavigate = useNavigate();
 
   const history = useNavigate();
   const handleLandPage = () => {
@@ -24,6 +25,17 @@ const Header = ({ userEmail }) => {
     handleLandPage();
   }
 
+  const handleList = () => {
+    navigate("/lista-usuario");
+  };
+
+  // const handleBack = () => {
+  //   backNavigate("/todos");
+  const handleBack = () => {
+    const location = useLocation();
+    location("/todo")
+   };
+  c
 
   return (
     <div className={isMenuOpen ? 'header open' : 'header'}>
@@ -37,8 +49,11 @@ const Header = ({ userEmail }) => {
       {isMenuOpen && (
         <div className="user-info">
           <p>{user.email}</p>
+          {location.pathname === "/lista-usuario" && (
+          <button className="register-button" onClick={handleBack}>Todos</button>
+          )}
           <button className="register-button" onClick={handleLogout}>Logout</button>
-          <button onClick={() => AlertDialog()} className="login-button">Deletar Conta</button>
+          <button onClick={handleList} className="login-button">Administrar Contas</button>
          
         </div>
       )}
@@ -47,5 +62,6 @@ const Header = ({ userEmail }) => {
     </div>
   );
 };
+
 
 export default Header;
