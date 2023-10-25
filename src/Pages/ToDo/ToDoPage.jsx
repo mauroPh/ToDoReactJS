@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function ToDoPage() {
   const [todos, setTodos,] = useState([]);
-  const [reloadAdd, setReloadAdd] = useState([]); //adicionei um novo estado para armazenar a lista atualizada de tarefas
+  const [reloadAdd, setReloadAdd] = useState([]);
   const navigate = useNavigate();
   
 
@@ -28,14 +28,14 @@ function ToDoPage() {
 
   useEffect(() => {
     fetchTodos();
-    setTodos(reloadAdd); // passo a atualizar  o estado da lista de tarefas
+    setTodos(reloadAdd);
   }, [reloadAdd]);
 
 
   async function handleAddTodo(todo) {
     try {
       const newTodo = await addTodo(todo);
-      setReloadAdd([...todos, newTodo]); // atualizo o estado com a lista atualizada de tarefas
+      setReloadAdd([...todos, newTodo]); 
     } catch (error) {
       console.error(error);
     }
@@ -51,7 +51,7 @@ function ToDoPage() {
   async function handleUpdate(id, updatedTodo) {
     try {
       await updateTodo(id, updatedTodo);
-      setReloadAdd([...todos]); // atualiza a lista de tarefas
+      setReloadAdd([...todos]);
     } catch (error) {
       console.error(error);
     }

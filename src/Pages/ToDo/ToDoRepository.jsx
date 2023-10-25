@@ -2,7 +2,7 @@ import { api } from "../Login/LoginRepository";
 
 async function getAllTodos() {
   try {
-    const response = await api.get('/todos?pageSize=5&pageNo=0&sortBy=todoId');
+    const response = await api.get('/todos');
     return response.data;
   } catch (error) {
     console.error(error);
