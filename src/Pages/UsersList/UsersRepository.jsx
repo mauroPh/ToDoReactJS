@@ -19,6 +19,7 @@ async function addUser(user) {
         return response.data;
     } catch (error) {
         console.error(error);
+        return { error: error.message, status: error.response ? error.response.status : 500 };
     }
     }
 

@@ -23,7 +23,7 @@ function RegisterPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const user = await addUser(email, password);
+      const user = await addUser({ email, password, profile });
       if (user) {
         localStorage.setItem("token", user.token);
         localStorage.setItem("email", user.username);
