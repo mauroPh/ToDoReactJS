@@ -1,29 +1,34 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { logout } from "../../services/auth";
-import AlertDialog from '../ConfirmDiolog/ConfirmDiolog';
 import './header.css';
 
-const Header = ({ userEmail }) => {
+const Header = ({ title,userEmail }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const user = {
     email: localStorage.getItem('email') || "usuario@gmail.com",
   };
-
+  const [redirectToUsersListPage, setRedirectToUsersListPage] = useState(false);
   const history = useNavigate();
-  const handleLandPage = () => {
-    history('/');
-};
 
-  // const handleDeleteAccount = () => {
-  //   console.log('Conta deletada');
-  // };
+  function handleLandPage() {
+    setMenuOpen(false);
+    history('/todos');
+    window.location.reload();
+  }
 
   function handleLogout() {
     logout();
     handleLandPage();
   }
 
+  function handleUsersListPage() {
+    setRedirectToUsersListPage(true);
+  }
+
+  if (redirectToUsersListPage) {
+    return <Navigate to="/users" />;
+  }
 
   return (
     <div className={isMenuOpen ? 'header open' : 'header'}>
@@ -37,13 +42,14 @@ const Header = ({ userEmail }) => {
       {isMenuOpen && (
         <div className="user-info">
           <p>{user.email}</p>
-          <button className="register-button" onClick={handleLogout}>Logout</button>
-          <button onClick={() => AlertDialog()} className="login-button">Deletar Conta</button>
-         
+          <button className="login-button" onClick={handleLandPage}>ToDo's</button>
+          <div className='button-separator'></div>
+          <button className="login-button" onClick={handleUsersListPage}>Usuários</button>
+          <div className='button-separator'></div>
+          <button className="register-button" onClick={handleLogout}>Sair</button>
         </div>
       )}
-      <h1 className="title">To-Do App</h1>
-
+      <h1 className="title">{title}</h1>
     </div>
   );
 };

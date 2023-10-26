@@ -1,4 +1,4 @@
-import { api } from "../Login/LoginRepository";
+import api from "../../services/api";
 
 async function getAllTodos() {
   try {

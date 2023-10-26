@@ -118,3 +118,42 @@ font-size: smaller;
   height: 40px;
   
 }
+
+.register-container {
+  max-height: 70%;
+  display: flex;
+  flex-direction: column; 
+ align-items: center;
+  justify-content: center;
+  height: 500px;
+  background-color: rgb(255, 255, 255);
+  max-width: 500px;
+  width: 450px;
+  padding: 50px 25px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 30px;
+  border: 1px solid #dadce0;  }
+
+  .popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .popup-title {
+    margin: 0;
+  }
+  
+  .button-close {
+    color: #333;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }

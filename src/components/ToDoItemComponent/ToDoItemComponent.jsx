@@ -2,7 +2,7 @@ import { mdiClose } from '@mdi/js';
 import Icon from '@mdi/react';
 import React, { useState } from "react";
 import { deleteTodo } from "../../Pages/ToDo/ToDoRepository";
-import "./ToDoItemComponent.css"
+import "./ToDoItemComponent.css";
 
 
 

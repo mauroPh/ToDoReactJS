@@ -1,9 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { isAuthenticated } from "../services/auth";
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import LoginPage from '../Pages/Login/LoginPage';
-import ToDoPage from '../Pages/ToDo/ToDoPage';
 import RegisterPage from '../Pages/Register/RegisterPage';
+import ToDoPage from '../Pages/ToDo/ToDoPage';
+import UsersListPage from '../Pages/UsersList/UsersList';
+import { isAuthenticated } from "../services/auth";
 
 const PrivateRoute = ({ children }) => (
   isAuthenticated() ? children : <Navigate to="/" />
@@ -13,8 +14,10 @@ const AppRoutes = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<LoginPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/users" element={<UsersListPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/todo" element={
+      <Route path="/todos" element={
         <PrivateRoute>
           <ToDoPage />
         </PrivateRoute>

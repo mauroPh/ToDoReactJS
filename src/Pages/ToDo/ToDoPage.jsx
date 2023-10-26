@@ -16,9 +16,7 @@ function ToDoPage() {
   async function fetchTodos() {
     try {
       const res = await getAllTodos();
-      console.log("fetchTodos result:", res);
       const todos = res.result.content;
-      console.log("fetchTodos todos:", todos);
       setTodos(todos);
     } catch (error) {
       console.error(error);
@@ -68,7 +66,7 @@ function ToDoPage() {
   
   return (  
     <div>
-    <Header/>
+     <Header title="My ToDo App" />
     
     <div className="App">
       <ul className="todo-list">
