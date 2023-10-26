@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { logout } from "../../services/auth";
 import './header.css';
 
@@ -23,19 +23,15 @@ const Header = ({ userEmail }) => {
   function handleLogout() {
     logout();
     handleLandPage();
-  }
+  };
 
   const handleList = () => {
     navigate("/lista-usuario");
   };
 
-  // const handleBack = () => {
-  //   backNavigate("/todos");
-  const handleBack = () => {
-    const location = useLocation();
-    location("/todo")
+   const handleBack = () => {
+     backNavigate("/todos");
    };
-  c
 
   return (
     <div className={isMenuOpen ? 'header open' : 'header'}>
@@ -49,9 +45,7 @@ const Header = ({ userEmail }) => {
       {isMenuOpen && (
         <div className="user-info">
           <p>{user.email}</p>
-          {location.pathname === "/lista-usuario" && (
           <button className="register-button" onClick={handleBack}>Todos</button>
-          )}
           <button className="register-button" onClick={handleLogout}>Logout</button>
           <button onClick={handleList} className="login-button">Administrar Contas</button>
          

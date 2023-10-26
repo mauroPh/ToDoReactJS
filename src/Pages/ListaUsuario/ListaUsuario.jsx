@@ -17,8 +17,8 @@ function ListaUsuario() {
   async function fetchUsers() {
     try {
       const res = await getAllUsers();
-      console.log("fetchUsers result:", res);
-      const users = res.result.content;
+      console.log("fetchUsers response:", res);
+      const users = res.result;
       console.log("fetchUsers users:", users);
       setUsers(users);
     } catch (error) {
@@ -60,14 +60,27 @@ function ListaUsuario() {
     
     <div className="App">
       <ul className="todo-list">
-      {users.map((users) => (
-          <ToDoItemComponent
-            key={users.id}
-            users={users}
-            handleDelete={handleDelete}
-            fetchUsers={fetchUsers}
-          />
-        ))}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>E-mail</th>
+                <th>Profile ID</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {users.map(i => (
+                console.log(i),
+                <tr key={i.userId}>
+                    <td>{i.userId}</td>
+                    <td>{i.email}</td>
+                    <td>{i.profile.profileId}</td>
+                    <td>{i.profile.description}</td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
       </ul>
      
      

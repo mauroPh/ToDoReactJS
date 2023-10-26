@@ -9,6 +9,8 @@ api.interceptors.request.use(
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      config.headers['Content-Type'] = 'application/json';
+      config.headers['Access-Control-Allow-Origin'] = 'http://localhost:8080';
     }
     return config;
   },

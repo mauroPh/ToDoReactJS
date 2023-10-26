@@ -2,7 +2,7 @@ import { api } from "../Login/LoginRepository";
 
 async function getAllUsers() {
   try {
-    const response = await api.get('/users');
+    const response = await api.get('/users', {crossdomain: true});
     return response.data;
   } catch (error) {
     console.error(error);
