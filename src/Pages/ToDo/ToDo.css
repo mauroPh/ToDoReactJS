@@ -52,3 +52,24 @@
   }
   
   
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination li {
+    display: inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .pagination li a {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .pagination li.active a {
+    background-color: #ccc;
+  }

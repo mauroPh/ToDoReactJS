@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 import Header from "../../components/Header/header";
 import UserCardComponent from "../../components/UserCardComponent/UserCardComponent";
 import RegisterPage from "../Register/RegisterPage";
@@ -8,6 +9,8 @@ function UsersListPage() {
   const [users, setUsers] = useState([]);
   const [reloadAdd,setReloadAdd] = useState([]);
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+const [itemsPerPage, setItemsPerPage] = useState(8);
   
   async function fetchUsers() {
     try {
@@ -23,6 +26,20 @@ function UsersListPage() {
     fetchUsers();
     setUsers(reloadAdd);
   }, [reloadAdd]);
+
+  function pageCount() {
+    return Math.ceil(users.length / itemsPerPage);
+  }
+
+  function currentItems() {
+    const startIndex = currentPage * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return users.slice(startIndex, endIndex);
+  }
+
+  function handlePageClick(data) {
+    setCurrentPage(data.selected);
+  }
 
   async function handleUpdate(id, updatedUser) {
     try {
@@ -70,7 +87,7 @@ function UsersListPage() {
       <Header title="Gerenciar usuários" />
       <div className="App">
         <ul className="todo-list">
-          {users.map((user) => (
+          {currentItems().map((user) => (
             <UserCardComponent
               key={user.id}
               user={user}
@@ -80,6 +97,14 @@ function UsersListPage() {
             />
           ))}
         </ul>
+        <ReactPaginate
+          pageCount={pageCount()}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          activeClassName={"active"}
+          previousLabel={"← Anterior"}
+          nextLabel={"Próxima →"}
+        />
         <button className="add-user-button" onClick={() => setShowRegisterPopup(true)}>
           Adicionar usuário
         </button>
