@@ -86,6 +86,7 @@ function ToDoPage() {
               handleCheckboxChange={handleCheckboxChange}
               handleDelete={handleDelete}
               handleUpdate={handleUpdate}
+              fetchTodos={fetchTodos}
             />
           ))}
         </ul>

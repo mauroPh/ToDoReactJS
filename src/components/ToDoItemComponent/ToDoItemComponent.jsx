@@ -13,7 +13,7 @@ function ToDoItemComponent(props) {
 
   function handleUpdate() {
     const updatedTodo = { ...props.todo, description: updatedTodoText };
-    props.handleUpdate(props.todo.todoId, updatedTodo); // MODIFICADO PARA RECEBER A CHAMADA DA FUNÇÃO DE ATUALIZAÇÃO TODO.TODOID DO BACKEND
+    props.handleUpdate(props.todo.todoId, updatedTodo); 
     setIsEditing(false);
   }
   
@@ -74,7 +74,6 @@ function ToDoItemComponent(props) {
           </label>
           <button className={props.todo.completed ? "delete-button delete-button-completed" : "delete-button"} onClick={handleDelete}>
             <Icon path={mdiClose} size={0.8} />
-            
           </button>
         </>
       )}

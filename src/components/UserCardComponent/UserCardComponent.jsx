@@ -1,10 +1,9 @@
 import { mdiClose } from '@mdi/js';
 import Icon from '@mdi/react';
 import React, { useState } from "react";
+import Avatar from 'react-avatar';
 import { deleteUser } from "../../Pages/UsersList/UsersRepository";
 import "../ToDoItemComponent/ToDoItemComponent.css";
-
-
 
 function UserCardComponent(props) {
   console.log("UserCardComponent props:", props);
@@ -61,7 +60,7 @@ function UserCardComponent(props) {
       </div>
       ) : (
         <>
-          
+          <Avatar name={props.user.email} size="50" round={true} />
           <label
             className= "todo-label"
             onClick={handleDescriptionClick}
@@ -70,7 +69,6 @@ function UserCardComponent(props) {
           </label>
           <button className= "delete-button" onClick={handleDelete}>
             <Icon path={mdiClose} size={0.8} />
-            
           </button>
         </>
       )}
