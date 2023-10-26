@@ -3,10 +3,10 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { logout } from "../../services/auth";
 import './header.css';
 
-const Header = ({ title,userEmail }) => {
+const Header = ({ title }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const user = {
-    email: localStorage.getItem('email') || "usuario@gmail.com",
+    email: localStorage.getItem('email')
   };
   const [redirectToUsersListPage, setRedirectToUsersListPage] = useState(false);
   const history = useNavigate();

@@ -10,7 +10,7 @@ function UsersListPage() {
   const [reloadAdd,setReloadAdd] = useState([]);
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-const [itemsPerPage, setItemsPerPage] = useState(8);
+  const itemsPerPage = 8;
   
   async function fetchUsers() {
     try {

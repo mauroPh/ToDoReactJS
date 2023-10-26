@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { logout } from "../../services/auth";
 import { addUser } from "../UsersList/UsersRepository";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [profile, setProfile] = useState("684fd078-c7ba-4204-a133-1546f61ebda9");
-  const navigate = useNavigate();
+  
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -25,9 +25,10 @@ function RegisterPage() {
     try {
       const user = await addUser({ email, password, profile });
       if (user) {
-        localStorage.setItem("token", user.token);
-        localStorage.setItem("email", user.username);
-        navigate("/");
+        // localStorage.setItem("token", user.token);
+        // localStorage.setItem("email", user.username);
+        logout();
+        window.location.replace("/login");
       }
     } catch (error) {
       console.error("Erro no registro: ", error);
