@@ -13,7 +13,7 @@ function ToDoItemComponent(props) {
 
   function handleUpdate() {
     const updatedTodo = { ...props.todo, description: updatedTodoText };
-    props.handleUpdate(props.todo.todoId, updatedTodo); // MODIFICADO PARA RECEBER A CHAMADA DA FUNÇÃO DE ATUALIZAÇÃO TODO.TODOID DO BACKEND
+    props.handleUpdate(props.todo.todoId, updatedTodo);
     setIsEditing(false);
   }
   
