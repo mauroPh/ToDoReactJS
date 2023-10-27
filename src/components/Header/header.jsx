@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/auth";
 import './header.css';
 
-const Header = ({ title }) => {
+const Header = ({ title, userEmail }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const user = {
-    email: localStorage.getItem('email')
+    email: localStorage.getItem('email'),
   };
-  const [redirectToUsersListPage, setRedirectToUsersListPage] = useState(false);
   const history = useNavigate();
 
   function handleLandPage() {
@@ -23,11 +22,9 @@ const Header = ({ title }) => {
   }
 
   function handleUsersListPage() {
-    setRedirectToUsersListPage(true);
-  }
-
-  if (redirectToUsersListPage) {
-    return <Navigate to="/users" />;
+    setMenuOpen(false);
+    history('/users');
+    window.location.reload();
   }
 
   return (

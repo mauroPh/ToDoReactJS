@@ -59,27 +59,38 @@
   transition: background-color 0.3s ease;
   }
 
-  .button-close {
-    position: fixed;
-      top: 30px;
-      right: 30px;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    background-color: rgba(230, 0, 10);
-    box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
+      .popup-container {
+        max-height: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 500px;
+        background-color: rgb(255, 255, 255);
+        max-width: 500px;
+        min-width: 450px;
+        padding: 50px 25px;
+        position: relative;
+        border-radius: 30px;
+    }
 
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    padding: 6px ;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  .button-close {
+      position: absolute;
+      top: 15px; 
+      right: 15px;
+      width: 30px;
+      height: 30px;
+      background-color: rgba(230, 0, 10);
+      box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
   }
-  
 
   .delete-button {
     align-items: center;

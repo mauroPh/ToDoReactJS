@@ -60,24 +60,15 @@ function UsersListPage() {
   }
 
   function RegisterPopup({ onClose }) {
-    function handleClose() {
-      onClose();
-    }
-  
     return (
       <div className="popup">
-        <header className="popup-header">
-          <h2 className="popup-title">Adicionar usuário</h2>
-          <button className="button-close" onClick={handleClose}>
-            X
-          </button>
-        </header>
-        <div className="register-container">
-          <RegisterPage />
+        <div className="popup-container">
+          <RegisterPage onClose={onClose} />
         </div>
       </div>
     );
   }
+  
   function handleCloseRegisterPopup() {
     setShowRegisterPopup(false);
   }

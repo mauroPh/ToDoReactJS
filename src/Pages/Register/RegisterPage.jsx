@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { addUser } from "../UsersList/UsersRepository";
 import { logout } from "../../services/auth";
 
-function RegisterPage() {
+function RegisterPage({onClose}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [profile, setProfile] = useState("684fd078-c7ba-4204-a133-1546f61ebda9");
-  const [registrationSuccess, setRegistrationSuccess] = useState(false); // Novo estado
+  const [registrationSuccess, setRegistrationSuccess] = useState(false); 
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -25,10 +25,7 @@ function RegisterPage() {
     try {
       const user = await addUser({ email, password, profile });
       if (user) {
-        // Realiza o logout após o registro bem-sucedido
         logout();
-
-        // Define o estado de sucesso do registro como verdadeiro
         setRegistrationSuccess(true);
       }
     } catch (error) {
@@ -36,23 +33,23 @@ function RegisterPage() {
     }
   };
 
-  // Função para lidar com o botão "OK"
   const handleOK = () => {
-    // Redireciona para a tela de login após clicar em "OK"
-    window.location.replace("/login"); // Pode usar a navegação apropriada aqui
+    window.location.replace("/login");
   };
 
   return (
     <div >
-      {/* Não renderiza o título "Criar Conta" se o registro for bem-sucedido */}
       {registrationSuccess ? (
         <div>
           <p>Usuário criado com sucesso!</p>
-          <button onClick={handleOK}>OK</button>
+          <button className="reg-user-button" onClick={handleOK}>OK</button>
         </div>
       ) : (
         <div className="login-container">
           <h1 className="login-title">Criar Conta</h1>
+          <button className="button-close" onClick={onClose}>
+            X
+          </button>
           <form onSubmit={handleSubmit}>
             <label>
               E-mail:
