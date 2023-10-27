@@ -49,6 +49,7 @@ function UsersListPage() {
       console.error(error);
     }
   }
+  
 
   async function handleDelete(id) {
     try {
@@ -79,13 +80,14 @@ function UsersListPage() {
       <div className="App">
         <ul className="todo-list">
           {currentItems().map((user) => (
-            <UserCardComponent
-              key={user.id}
-              user={user}
-              handleDelete={handleDelete}
-              handleUpdate={handleUpdate}
-              fetchUsers={fetchUsers}
-            />
+           <UserCardComponent
+           key={user.id}
+           user={user}
+           handleDelete={handleDelete}
+           handleUpdate={handleUpdate}
+           fetchUsers={fetchUsers}
+         />
+         
           ))}
         </ul>
         <ReactPaginate

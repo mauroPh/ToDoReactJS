@@ -25,7 +25,7 @@ async function addUser(user) {
 
 async function updateUser(id, user) {
   try {
-    const response = await api.put(`/users/update/${id}`, user);
+    const response = await api.put(`/users/${id}`, user);
     return response.data;
   } catch (error) {
     console.error(error);

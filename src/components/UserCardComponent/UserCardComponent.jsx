@@ -6,20 +6,24 @@ import { deleteUser } from "../../Pages/UsersList/UsersRepository";
 import "../ToDoItemComponent/ToDoItemComponent.css";
 
 function UserCardComponent(props) {
-  console.log("UserCardComponent props:", props);
   const [isEditing, setIsEditing] = useState(false);
-  const [updatedText, setUpdatedText] = useState(props.user.email);
+  const [updatedEmail, setUpdatedEmail] = useState(props.user.email);
+  const [updatedPassword, setUpdatedPassword] = useState(props.user.password);
 
   function handleUpdate() {
-    const updatedUser = { ...props.user, email: updatedText };
+    const updatedUser = {
+      ...props.user,
+      email: updatedEmail,
+      password: updatedPassword
+    };
     props.handleUpdate(props.user.userId, updatedUser);
     setIsEditing(false);
   }
-  
 
   function handleCancel() {
     setIsEditing(false);
-    setUpdatedText(props.user.email);
+    setUpdatedEmail(props.user.email);
+    setUpdatedPassword(props.user.password);
   }
 
   const handleDelete = async () => {
@@ -33,7 +37,8 @@ function UserCardComponent(props) {
 
   const handleDescriptionClick = () => {
     setIsEditing(true);
-    setUpdatedText(props.user.email);
+    setUpdatedEmail(props.user.email);
+    setUpdatedPassword(props.user.password);
   };
 
   const handleKeyDown = (event) => {
@@ -46,28 +51,36 @@ function UserCardComponent(props) {
     <div className="todo-item">
       {isEditing ? (
         <div className="popup">
-        <div className="popup-content">
-          <textarea
-            value={updatedText}
-            onChange={(event) => setUpdatedText(event.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-          <div className="button-container">
-          <button className="popup-content button" onClick={handleUpdate}><Icon path={mdiContentSave} size={1} /></button>
-            <button className="popup-content button" onClick={handleCancel}><Icon path={mdiClose} size={1} /></button>
+          <div className="popup-content">
+            <input
+              type="text"
+              value={updatedEmail}
+              onChange={(event) => setUpdatedEmail(event.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <input
+              type="password"
+              value={updatedPassword}
+              onChange={(event) => setUpdatedPassword(event.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <div className="button-container">
+              <button className="popup-content button" onClick={handleUpdate}>
+                <Icon path={mdiContentSave} size={1} />
+              </button>
+              <button className="popup-content button" onClick={handleCancel}>
+                <Icon path={mdiClose} size={1} />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       ) : (
         <>
           <Avatar name={props.user.email} size="50" round={true} />
-          <label
-            className= "todo-label"
-            onClick={handleDescriptionClick}
-          >
+          <label className="todo-label" onClick={handleDescriptionClick}>
             {props.user.email}
           </label>
-          <button className= "delete-button" onClick={handleDelete}>
+          <button className="delete-button" onClick={handleDelete}>
             <Icon path={mdiClose} size={0.8} />
           </button>
         </>
