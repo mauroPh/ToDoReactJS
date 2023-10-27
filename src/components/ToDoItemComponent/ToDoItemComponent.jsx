@@ -1,8 +1,8 @@
-import { mdiClose } from '@mdi/js';
+import { mdiClose, mdiContentSave } from '@mdi/js';
 import Icon from '@mdi/react';
 import React, { useState } from "react";
 import { deleteTodo } from "../../Pages/ToDo/ToDoRepository";
-import "./ToDoItemComponent.css";
+import "./ToDoItemComponent.css"
 
 
 
@@ -13,7 +13,7 @@ function ToDoItemComponent(props) {
 
   function handleUpdate() {
     const updatedTodo = { ...props.todo, description: updatedTodoText };
-    props.handleUpdate(props.todo.todoId, updatedTodo); 
+    props.handleUpdate(props.todo.todoId, updatedTodo); // MODIFICADO PARA RECEBER A CHAMADA DA FUNÇÃO DE ATUALIZAÇÃO TODO.TODOID DO BACKEND
     setIsEditing(false);
   }
   
@@ -54,7 +54,7 @@ function ToDoItemComponent(props) {
             onKeyDown={handleKeyDown}
           />
           <div className="button-container">
-            <button className="popup-content button" onClick={handleUpdate}>Salvar</button>
+            <button className="popup-content button" onClick={handleUpdate}><Icon path={mdiContentSave} size={1} /></button>
             <button className="popup-content button" onClick={handleCancel}><Icon path={mdiClose} size={1} /></button>
           </div>
         </div>
@@ -74,6 +74,7 @@ function ToDoItemComponent(props) {
           </label>
           <button className={props.todo.completed ? "delete-button delete-button-completed" : "delete-button"} onClick={handleDelete}>
             <Icon path={mdiClose} size={0.8} />
+            
           </button>
         </>
       )}
