@@ -1,4 +1,4 @@
-import { mdiClose } from '@mdi/js';
+import { mdiClose, mdiContentSave } from '@mdi/js';
 import Icon from '@mdi/react';
 import React, { useState } from "react";
 import Avatar from 'react-avatar';
@@ -53,7 +53,7 @@ function UserCardComponent(props) {
             onKeyDown={handleKeyDown}
           />
           <div className="button-container">
-            <button className="popup-content button" onClick={handleUpdate}>Salvar</button>
+          <button className="popup-content button" onClick={handleUpdate}><Icon path={mdiContentSave} size={1} /></button>
             <button className="popup-content button" onClick={handleCancel}><Icon path={mdiClose} size={1} /></button>
           </div>
         </div>
