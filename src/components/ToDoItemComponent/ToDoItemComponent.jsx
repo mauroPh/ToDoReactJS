@@ -77,22 +77,7 @@ const ToDoLabelInput = styled.input`
   resize: vertical;
 `;
 
-const ToDoDeleteButton = styled.button`
-  align-self: flex-start;
-  margin-left: 10px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: #ff0000;
 
-align-self: flex-start;
-
-&:hover {   color: #ff0000;
-  background-color: #f2f2f2;
-  border-radius: 2px;
-  cursor: pointer;
-}
-`;
 
 const ToDoPopup = styled.div`
   position: absolute;
@@ -168,21 +153,21 @@ const ToDoMarker = styled.div`
   font-size: 1.2rem;
 `;
 
-const EditButton = styled.button`
-align-items:flex-start;
-justify-content: flex-start;
-height: 20px;
-margin-left:15px;
-margin-top:5px;
-color: rgba(230, 0, 10);
-box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
-background-color: transparent;
-border: none;
-border-radius: 5px;
-font-size: 11px;
-font-weight: 600;
-cursor: pointer;
-transition: background-color 0.3s ease;
+const ToDoDeleteButton = styled.button`
+  align-self: flex-start;
+  margin-left: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ff0000;
+
+align-self: flex-start;
+
+&:hover {   color: #ff0000;
+  background-color: #f2f2f2;
+  border-radius: 2px;
+  cursor: pointer;
+}
 `;
 
 function ToDoItemComponent(props) {
@@ -284,13 +269,11 @@ function ToDoItemComponent(props) {
               />
               {isEditing ? (
                 <ToDoLabel>
-                <Row>
                 <ToDoLabelInput
                   value={updatedTodoText}
                   onChange={(event) => setUpdatedTodoText(event.target.value)}
                   onKeyDown={handleKeyDown}
                 />
-                </Row>
                 </ToDoLabel>
         ) :(
             <ToDoLabel
