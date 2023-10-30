@@ -52,12 +52,14 @@ function UserCardComponent(props) {
       {isEditing ? (
         <div className="popup">
           <div className="popup-content">
+            <h5>E-mail</h5>
             <input
               type="text"
               value={updatedEmail}
               onChange={(event) => setUpdatedEmail(event.target.value)}
               onKeyDown={handleKeyDown}
             />
+            <h5>Senha</h5>
             <input
               type="password"
               value={updatedPassword}

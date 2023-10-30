@@ -74,7 +74,18 @@ transition: background-color 0.3s ease;
       padding: 50px 25px;
       position: relative;
       border-radius: 30px;
+   
   }
+
+  .popup-content h5 {
+    margin: 10px 5px 10px 5px;; 
+    padding-bottom: 5px; 
+  }
+  .popup-content input {
+    padding: 5px; 
+    margin-bottom: 10px; 
+  }
+
 
 .button-close {
     position: absolute;
