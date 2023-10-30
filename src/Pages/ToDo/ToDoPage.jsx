@@ -10,7 +10,7 @@ function ToDoPage() {
   const [todos, setTodos] = useState([]);
   const [reloadAdd, setReloadAdd] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
 
   async function fetchTodos() {
     try {
@@ -98,7 +98,7 @@ function ToDoPage() {
           previousLabel={"← Anterior"}
           nextLabel={"Próxima →"}
         />
-        <AddTodoFormComponent saveTodo={handleAddTodo} />
+        <AddTodoFormComponent saveTodo={handleAddTodo} fetchTodos={fetchTodos} />
       </div>
     </div>
   );

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/auth";
 import './header.css';
 
-const Header = ({ title,userEmail }) => {
+const Header = ({ title, userEmail }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const user = {
     email: localStorage.getItem('email') || "usuario@gmail.com",
   };
-  const [redirectToUsersListPage, setRedirectToUsersListPage] = useState(false);
   const history = useNavigate();
 
   function handleLandPage() {
@@ -23,11 +22,9 @@ const Header = ({ title,userEmail }) => {
   }
 
   function handleUsersListPage() {
-    setRedirectToUsersListPage(true);
-  }
-
-  if (redirectToUsersListPage) {
-    return <Navigate to="/users" />;
+    setMenuOpen(false);
+    history('/users');
+    window.location.reload();
   }
 
   return (
@@ -42,11 +39,11 @@ const Header = ({ title,userEmail }) => {
       {isMenuOpen && (
         <div className="user-info">
           <p>{user.email}</p>
-          <button className="login-button" onClick={handleLandPage}>ToDo's</button>
+          <button className="menu-button" onClick={handleLandPage}>ToDo's</button>
           <div className='button-separator'></div>
-          <button className="login-button" onClick={handleUsersListPage}>Usuários</button>
+          <button className="menu-button" onClick={handleUsersListPage}>Usuários</button>
           <div className='button-separator'></div>
-          <button className="register-button" onClick={handleLogout}>Sair</button>
+          <button className="exit-button" onClick={handleLogout}>Sair</button>
         </div>
       )}
       <h1 className="title">{title}</h1>

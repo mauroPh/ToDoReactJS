@@ -78,20 +78,42 @@ body{
     background: rgb(255 255 255 / 59%);
     padding: 10px 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 3px 1px rgba(0, 0, 0, .2);
+    box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
     z-index: 4;
 }
 
-.delete-button {
+.menu-button {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: red;
+    background-color: rgba(230, 0, 10);
+    box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
+
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.delete-button:hover {
+.menu-button:hover {
     background-color: darkred;
 }
+
+.exit-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #eee;
+    color: rgba(230, 0, 10);
+    box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
+
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.exit-button:hover {
+    background-color: #ddd;
+}
+.button-separator {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+  }

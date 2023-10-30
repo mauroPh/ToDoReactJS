@@ -10,7 +10,9 @@ function UsersListPage() {
   const [reloadAdd,setReloadAdd] = useState([]);
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-const [itemsPerPage, setItemsPerPage] = useState(8);
+  const [itemsPerPage, setItemsPerPage] = useState(8);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [userToDelete, setUserToDelete] = useState(null);
   
   async function fetchUsers() {
     try {
@@ -67,20 +69,45 @@ const [itemsPerPage, setItemsPerPage] = useState(8);
     return (
       <div className="popup">
         <header className="popup-header">
-          <h2 className="popup-title">Adicionar usuário</h2>
+          <h2 className="popup-title">Editar usuário</h2>
           <button className="button-close" onClick={handleClose}>
             X
           </button>
         </header>
         <div className="register-container">
-          <RegisterPage />
+          <RegisterPage user={selectedUser} onClose={handleClose} />
         </div>
       </div>
     );
   }
+
+  function handleEdit(user) {
+    setSelectedUser(user);
+    setShowRegisterPopup(true);
+  }
+
   function handleCloseRegisterPopup() {
+    setSelectedUser(null);
     setShowRegisterPopup(false);
   }
+
+  const handleDeleteUser = (user) => {
+    setUserToDelete(user);
+  };
+
+  const handleClosePopup = () => {
+    setUserToDelete(null);
+  };
+
+  const handleConfirmPopup = async () => {
+    try {
+      await handleDelete(userToDelete.id);
+      fetchUsers();
+      handleClosePopup();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
@@ -91,9 +118,10 @@ const [itemsPerPage, setItemsPerPage] = useState(8);
             <UserCardComponent
               key={user.id}
               user={user}
-              handleDelete={handleDelete}
+              handleDelete={handleDeleteUser}
               handleUpdate={handleUpdate}
               fetchUsers={fetchUsers}
+              handleEdit={() => handleEdit(user)}
             />
           ))}
         </ul>
@@ -109,6 +137,17 @@ const [itemsPerPage, setItemsPerPage] = useState(8);
           Adicionar usuário
         </button>
         {showRegisterPopup && <RegisterPopup onClose={handleCloseRegisterPopup} />}
+        {userToDelete && (
+          <div className="popup">
+            <div className="popup-content">
+              <h2>Tem certeza que deseja excluir o usuário?</h2>
+              <div className="button-container">
+                <button className="popup-content button" onClick={handleConfirmPopup}>Sim</button>
+                <button className="popup-content button" onClick={handleClosePopup}>Não</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

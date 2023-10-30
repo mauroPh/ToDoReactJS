@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../UsersList/UsersRepository";
 
-function RegisterPage() {
+function RegisterPage({ closePopup }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [profile, setProfile] = useState("684fd078-c7ba-4204-a133-1546f61ebda9");
+  const [profile, setProfile] = useState("user");
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
@@ -23,11 +23,11 @@ function RegisterPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const user = await addUser(email, password);
+      const profileId = profile === "user" ? "684fd078-c7ba-4204-a133-1546f61ebda9" : "ae576a80-ddb8-44f5-88f0-635ee39d559d";
+      const user = await addUser({ email, password, profile: profileId });
       if (user) {
-        localStorage.setItem("token", user.token);
-        localStorage.setItem("email", user.username);
-        navigate("/");
+        closePopup();
+        navigate("/users");
       }
     } catch (error) {
       console.error("Erro no registro: ", error);
