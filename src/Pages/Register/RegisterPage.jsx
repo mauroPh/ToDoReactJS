@@ -45,7 +45,7 @@ function RegisterPage({onClose}) {
           <button className="reg-user-button" onClick={handleOK}>OK</button>
         </div>
       ) : (
-        <div className="login-container">
+        <div className="popup-container">
           <h1 className="login-title">Criar Conta</h1>
           <button className="button-close" onClick={onClose}>
             X
@@ -66,7 +66,7 @@ function RegisterPage({onClose}) {
                 <option value="admin">Admin</option>
               </select>
             </label>
-            <button type="submit" className="reg-user-button">Criar Conta</button>
+            <button type="submit" className="login-button">Criar Conta</button>
           </form>
         </div>
       )}

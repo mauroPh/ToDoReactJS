@@ -49,6 +49,10 @@
     padding: 20px;
     overflow: hidden;
     overflow-y: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centraliza os Cards na tela */
   }
   
   

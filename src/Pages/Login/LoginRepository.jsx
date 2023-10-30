@@ -15,7 +15,6 @@ async function getUserInfo(email, password) {
   }
 }
 
-
 export {
   getUserInfo
 };

@@ -8,9 +8,9 @@ import { addTodo, deleteTodo, getAllTodos, updateTodo } from "./ToDoRepository";
 
 function ToDoPage() {
   const [todos, setTodos] = useState([]);
-   const [reloadAdd, setReloadAdd] = useState([]);
+  const [reloadAdd, setReloadAdd] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 5;
+  const itemsPerPage = 8;
 
   async function fetchTodos() {
     try {
@@ -90,14 +90,16 @@ function ToDoPage() {
             />
           ))}
         </ul>
-        <ReactPaginate
-          pageCount={pageCount()}
-          onPageChange={handlePageClick}
-          containerClassName={"pagination"}
-          activeClassName={"active"}
-          previousLabel={"← Anterior"}
-          nextLabel={"Próxima →"}
-        />
+        {pageCount() > 1 && ( 
+          <ReactPaginate
+            pageCount={pageCount()}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination"}
+            activeClassName={"active"}
+            previousLabel={"← Anterior"}
+            nextLabel={"Próxima →"}
+          />
+        )}
         <AddTodoFormComponent saveTodo={handleAddTodo} />
       </div>
     </div>

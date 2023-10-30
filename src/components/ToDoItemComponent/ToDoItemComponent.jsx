@@ -44,7 +44,7 @@ function ToDoItemComponent(props) {
   };
 
   return (
-    <div className={props.todo.completed ? "todo-item todo-item-completed" : "todo-item"}>
+    <div className={props.todo.completed ? "card-wrapper todo-item-completed" : "card-wrapper"}>
       {isEditing ? (
         <div className="popup">
         <div className="popup-content">

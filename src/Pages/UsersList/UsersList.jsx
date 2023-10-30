@@ -4,6 +4,7 @@ import Header from "../../components/Header/header";
 import UserCardComponent from "../../components/UserCardComponent/UserCardComponent";
 import RegisterPage from "../Register/RegisterPage";
 import { deleteUser, getAllUsers, updateUser } from "./UsersRepository";
+import ConfirmationPopup from "../../components/ConfirmationPopup/ConfirmationPopup";
 
 function UsersListPage() {
   const [users, setUsers] = useState([]);
@@ -12,6 +13,9 @@ function UsersListPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 8;
   
+  const [isConfirmationPopupVisible, setIsConfirmationPopupVisible] = useState(false);
+  const [confirmationMessage, setConfirmationMessage] = useState("");
+
   async function fetchUsers() {
     try {
       const res = await getAllUsers();
@@ -45,11 +49,17 @@ function UsersListPage() {
     try {
       await updateUser(id, updatedUser);
       setReloadAdd([...users]);
+      // Mostra o popup de confirmação com a mensagem desejada
+      showConfirmationPopup("Email e senha atualizados com sucesso");
     } catch (error) {
       console.error(error);
     }
   }
-  
+  // Função para mostrar o popup de confirmação
+  const showConfirmationPopup = (message) => {
+    setConfirmationMessage(message);
+    setIsConfirmationPopupVisible(true);
+  };
 
   async function handleDelete(id) {
     try {
@@ -74,35 +84,51 @@ function UsersListPage() {
     setShowRegisterPopup(false);
   }
 
-  return (
+  
+
+   return (
     <div>
       <Header title="Gerenciar usuários" />
       <div className="App">
         <ul className="todo-list">
           {currentItems().map((user) => (
-           <UserCardComponent
-           key={user.id}
-           user={user}
-           handleDelete={handleDelete}
-           handleUpdate={handleUpdate}
-           fetchUsers={fetchUsers}
-         />
-         
+            <UserCardComponent
+              key={user.id}
+              user={user}
+              handleDelete={handleDelete}
+              handleUpdate={handleUpdate}
+              fetchUsers={fetchUsers}
+            />
           ))}
         </ul>
-        <ReactPaginate
-          pageCount={pageCount()}
-          onPageChange={handlePageClick}
-          containerClassName={"pagination"}
-          activeClassName={"active"}
-          previousLabel={"← Anterior"}
-          nextLabel={"Próxima →"}
-        />
+        {pageCount() > 1 && ( 
+          <ReactPaginate
+            pageCount={pageCount()}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination"}
+            activeClassName={"active"}
+            previousLabel={"← Anterior"}
+            nextLabel={"Próxima →"}
+          />
+        )}
         <button className="add-user-button" onClick={() => setShowRegisterPopup(true)}>
           Adicionar usuário
         </button>
         {showRegisterPopup && <RegisterPopup onClose={handleCloseRegisterPopup} />}
       </div>
+
+      {/* Exibe o popup de confirmação se isConfirmationPopupVisible for true */}
+      {isConfirmationPopupVisible && (
+        <ConfirmationPopup
+          question={confirmationMessage}
+          onConfirm={() => {
+            setIsConfirmationPopupVisible(false);
+          }}
+          onCancel={() => {
+            setIsConfirmationPopupVisible(false);
+          }}
+        />
+      )}
     </div>
   );
 }

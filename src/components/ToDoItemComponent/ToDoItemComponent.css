@@ -1,28 +1,4 @@
-.todo-item {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  padding: 16px;
-  text-align: center;
-}
-
-.todo-item-completed{
-    background-color: #e3e0e0;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    padding: 16px;
-    text-align: center;
-  }
-
-  .add-user-button {
+ .add-user-button {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -62,18 +38,20 @@ transition: background-color 0.3s ease;
 }
 
     .popup-container {
-      max-height: 70%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 500px;
+      height: 270px;
       background-color: rgb(255, 255, 255);
       max-width: 500px;
-      min-width: 450px;
+      width: 500px;
       padding: 50px 25px;
-      position: relative;
+      position: absolute;
       border-radius: 30px;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
   }
 
 .button-close {
@@ -241,4 +219,70 @@ transition: background-color 0.3s ease;
   font-size: 1rem;
   padding: 0.5rem;
   margin-bottom: 1rem;
+}
+
+/* CSS USERCARDCOMPONENT PARA EDIÇÃO NO POPUP */
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px; 
+}
+
+.email-label, .password-label {
+  align-self: center;
+  margin-bottom: 10px; 
+  color: rgb(166, 54, 58);
+  font-weight: 600;
+}
+
+
+/* CSS TODOITEMCOMPONENT PARA EDIÇÃO NO POPUP */
+
+
+.todo-item {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 16px;
+  text-align: center;
+  
+}
+
+.todo-item-completed{
+    background-color: #e3e0e0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+
+
+.card-wrapper {
+  width: 270px;
+  height: 200px;
+  margin-right: 20px; /* Reduzido o margin-right para melhor responsividade */
+  margin-bottom: 20px; /* Adicionado margin-bottom para espaçamento entre os Cards */
+  box-shadow: 0px 3px 10px #a5a5a5;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Adicionado overflow para ocultar conteúdo que estourar o container */
+
+
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 16px;
+    text-align: center;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import iconToDo from '../../assets/lista-de-afazeres.png';
+// import iconToDo from '../../assets/lista-de-afazeres.png';
 import "./Login.css";
 import { getUserInfo } from "./LoginRepository";
 
@@ -35,7 +35,7 @@ function Login() {
 
   return (
     <div className="login-container">
-      <p>To-Do App</p>
+      {/* <p>Project ToDo</p> */}
       <h1 className="login-title">Fazer login</h1>
       <form onSubmit={handleSubmit}>
         <label className={`label-${usernameLabelPosition}`}>
@@ -54,15 +54,13 @@ function Login() {
             onChange={handlePasswordChange}
           />
         </label>
-        <p className="text-display-medium">
+        {/* <p className="text-display-medium">
           Esqueceu seu email ou sua senha?
           <a href="cadastro.html">Clique aqui</a>
-        </p>
-
+        </p> */}
           <div className='button-separator'></div>
           <button type="submit" className="login-button">Acessar</button>
-       
-        <img src={iconToDo} alt="Minha Imagem" className='imagem-fixa'/>
+        {/* <img src={iconToDo} alt="Minha Imagem" className='imagem-fixa'/> */}
       </form>
     </div>
   );

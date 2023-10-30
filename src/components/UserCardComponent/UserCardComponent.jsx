@@ -33,37 +33,43 @@ function UserCardComponent(props) {
     } catch (error) {
       console.error(error);
     }
-  };
+  }
 
   const handleDescriptionClick = () => {
     setIsEditing(true);
     setUpdatedEmail(props.user.email);
     setUpdatedPassword(props.user.password);
-  };
+  }
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       handleUpdate();
     }
-  };
+  }
 
   return (
-    <div className="todo-item">
+    <div className="card-wrapper">
       {isEditing ? (
         <div className="popup">
           <div className="popup-content">
-            <input
-              type="text"
-              value={updatedEmail}
-              onChange={(event) => setUpdatedEmail(event.target.value)}
-              onKeyDown={handleKeyDown}
-            />
-            <input
-              type="password"
-              value={updatedPassword}
-              onChange={(event) => setUpdatedPassword(event.target.value)}
-              onKeyDown={handleKeyDown}
-            />
+          <div className="input-container">
+                  <label className="email-label">Email:</label>
+                  <input
+                    type="text"
+                    value={updatedEmail}
+                    onChange={(event) => setUpdatedEmail(event.target.value)}
+                    onKeyDown={handleKeyDown}
+                  />
+                </div>
+                <div className="input-container">
+                  <label className="password-label">Password:</label>
+                  <input
+                    type="password"
+                    value={updatedPassword}
+                    onChange={(event) => setUpdatedPassword(event.target.value)}
+                    onKeyDown={handleKeyDown}
+                  />
+                </div>
             <div className="button-container">
               <button className="popup-content button" onClick={handleUpdate}>
                 <Icon path={mdiContentSave} size={1} />
@@ -83,6 +89,7 @@ function UserCardComponent(props) {
           <button className="delete-button" onClick={handleDelete}>
             <Icon path={mdiClose} size={0.8} />
           </button>
+          
         </>
       )}
     </div>
