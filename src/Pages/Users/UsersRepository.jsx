@@ -24,7 +24,9 @@ async function addUser(user) {
 
 async function updateUser(id, user) {
   try {
-    const response = await api.put(`/users/update/${id}`, user);
+    console.log(id, user);
+    const response = await api.put(`/users/${id}`, user);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -43,3 +45,4 @@ async function deleteUser(id) {
     }
 
 export { addUser, deleteUser, getAllUsers, updateUser };
+

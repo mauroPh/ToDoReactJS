@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import Header from "../../components/Header/header";
-import UserCardComponent from "../../components/UserCardComponent/UserCardComponent";
+import Header from "../../components/Header/Header";
+import CenterModal from '../../styles/styledComponents/CenterModal';
+import UserCardComponent from "../../styles/styledComponents/UserCardComponent";
 import RegisterPage from "../Register/RegisterPage";
 import { deleteUser, getAllUsers, updateUser } from "./UsersRepository";
 
-function UsersListPage() {
+function UsersPage() {
   const [users, setUsers] = useState([]);
-  const [reloadAdd,setReloadAdd] = useState([]);
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(8);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [selectedUser, setSelectedUser] = useState(null);
   const [userToDelete, setUserToDelete] = useState(null);
   
@@ -26,8 +26,7 @@ function UsersListPage() {
 
   useEffect(() => {
     fetchUsers();
-    setUsers(reloadAdd);
-  }, [reloadAdd]);
+  }, []);
 
   function pageCount() {
     return Math.ceil(users.length / itemsPerPage);
@@ -46,7 +45,7 @@ function UsersListPage() {
   async function handleUpdate(id, updatedUser) {
     try {
       await updateUser(id, updatedUser);
-      setReloadAdd([...users]);
+      fetchUsers();
     } catch (error) {
       console.error(error);
     }
@@ -59,26 +58,6 @@ function UsersListPage() {
     } catch (error) {
       console.error(error);
     }
-  }
-
-  function RegisterPopup({ onClose }) {
-    function handleClose() {
-      onClose();
-    }
-  
-    return (
-      <div className="popup">
-        <header className="popup-header">
-          <h2 className="popup-title">Editar usuário</h2>
-          <button className="button-close" onClick={handleClose}>
-            X
-          </button>
-        </header>
-        <div className="register-container">
-          <RegisterPage user={selectedUser} onClose={handleClose} />
-        </div>
-      </div>
-    );
   }
 
   function handleEdit(user) {
@@ -133,10 +112,11 @@ function UsersListPage() {
           previousLabel={"← Anterior"}
           nextLabel={"Próxima →"}
         />
+
         <button className="add-user-button" onClick={() => setShowRegisterPopup(true)}>
           Adicionar usuário
         </button>
-        {showRegisterPopup && <RegisterPopup onClose={handleCloseRegisterPopup} />}
+        {showRegisterPopup && <CenterModal><RegisterPage closePopup={handleCloseRegisterPopup} fetchUsers={fetchUsers} /></CenterModal>}
         {userToDelete && (
           <div className="popup">
             <div className="popup-content">
@@ -153,4 +133,4 @@ function UsersListPage() {
   );
 }
 
-export default UsersListPage;
+export default UsersPage;

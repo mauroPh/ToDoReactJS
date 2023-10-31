@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/auth";
-import './header.css';
+import '../../styles/style.sass';
 
 const Header = ({ title, userEmail }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);

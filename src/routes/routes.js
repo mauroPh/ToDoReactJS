@@ -3,7 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import LoginPage from '../Pages/Login/LoginPage';
 import RegisterPage from '../Pages/Register/RegisterPage';
 import ToDoPage from '../Pages/ToDo/ToDoPage';
-import UsersListPage from '../Pages/UsersList/UsersList';
+import UsersPage from '../Pages/Users/UsersPage';
 import { isAuthenticated } from "../services/auth";
 
 const PrivateRoute = ({ children }) => (
@@ -15,7 +15,7 @@ const AppRoutes = () => (
     <Routes>
       <Route path="/" element={<LoginPage />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/users" element={<UsersListPage />} />
+      <Route path="/users" element={<UsersPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/todos" element={
         <PrivateRoute>

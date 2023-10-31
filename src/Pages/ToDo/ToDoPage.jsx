@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import AddTodoFormComponent from "../../components/AddToDoFormComponent/AddToDoFormComponent";
-import Header from "../../components/Header/header";
-import ToDoItemComponent from "../../components/ToDoItemComponent/ToDoItemComponent";
-import "./ToDo.css";
+import Header from '../../components/Header/Header';
+import '../../styles/style.sass';
+import ToDoItemComponent from "../../styles/styledComponents/ToDoItemComponent";
 import { addTodo, deleteTodo, getAllTodos, updateTodo } from "./ToDoRepository";
 
 function ToDoPage() {
   const [todos, setTodos] = useState([]);
   const [reloadAdd, setReloadAdd] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [itemsPerPage, setItemsPerPage] = useState(7);
 
   async function fetchTodos() {
     try {
@@ -93,7 +93,7 @@ function ToDoPage() {
         <ReactPaginate
           pageCount={pageCount()}
           onPageChange={handlePageClick}
-          containerClassName={"pagination"}
+          containerClassName={"pagination with-add-todo-form"}
           activeClassName={"active"}
           previousLabel={"← Anterior"}
           nextLabel={"Próxima →"}

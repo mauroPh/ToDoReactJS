@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import iconToDo from '../../assets/lista-de-afazeres.png';
-import "./Login.css";
+import '../../styles/style.sass';
 import { getUserInfo } from "./LoginRepository";
 
 function Login() {

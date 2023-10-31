@@ -3,7 +3,10 @@ import Icon from '@mdi/react';
 import React, { useState } from "react";
 import styled from "styled-components";
 import { deleteTodo, updateTodo } from "../../Pages/ToDo/ToDoRepository";
-import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
+import CenterModal from './CenterModal';
+import ConfirmationPopup from "./ConfirmationPopup";
+import EditingTodoComponent from "./EditingTodoComponent";
+
 
 const ToDoItem = styled.div`
   display: flex;
@@ -60,10 +63,8 @@ margin-right: 10px;
   cursor: pointer;
   text-decoration: ${(props) => (props.completed ? "line-through" : "none")};
   white-space: nowrap;
-  width:auto;
 `;
 const ToDoLabelInput = styled.input`
-  width: auto;
   align-self: flex-start;
   margin-right: 10px;
   cursor: pointer;
@@ -123,6 +124,22 @@ const ToDoCancelButton = styled.button`
   cursor: pointer;
 `;
 
+const EditButton = styled.button`
+position:relative;
+justify-content: center;
+align-items: center;
+align-self: Center;
+  background-color: #fff;
+  color: #0077ff;
+  border: 1px solid #FFFFFF;
+  box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
+
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 10px;
+`;
+
 const ToDoDetails = styled.div`
   position:relative;
   left: 50%;
@@ -177,6 +194,8 @@ function ToDoItemComponent(props) {
   const [showPopup, setShowPopup] = useState(false);
   const [isDeleteConfirmation, setIsDeleteConfirmation] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [isCenterModalOpen, setIsCenterModalOpen] = useState(false);
+
 
   function handleUpdate() {
     const updatedTodo = { ...props.todo, description: updatedTodoText };
@@ -206,22 +225,18 @@ function ToDoItemComponent(props) {
     setShowDetails(!showDetails);
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleUpdate();
-      setIsEditing(false);
-    } else if (event.key === 'Escape') {
-      handleCancel();
-    }
+
+  const handleOpenCenterModal = () => {
+    setIsCenterModalOpen(true);
+  };
+
+  const handleCloseCenterModal = () => {
+    setIsCenterModalOpen(false);
   };
 
   const handleCheckboxChange = () => {
     setIsDeleteConfirmation(false);
     setShowPopup(true);
-  };
-
-  const handleEditClick = () => {
-    setIsEditing(true);
   };
 
   const handleClosePopup = () => {
@@ -267,34 +282,49 @@ function ToDoItemComponent(props) {
                 size={0.8}
                 onClick={handleArrowClick}
               />
-              {isEditing ? (
-                <ToDoLabel>
-                <ToDoLabelInput
-                  value={updatedTodoText}
-                  onChange={(event) => setUpdatedTodoText(event.target.value)}
-                  onKeyDown={handleKeyDown}
-                />
-                </ToDoLabel>
-        ) :(
+              
             <ToDoLabel
               completed={props.todo.completed}
               onClick={handleDescriptionClick}
             >
             {props.todo.description}
+            {showDetails && <EditButton onClick={handleOpenCenterModal}>Editar</EditButton>}
+            {isCenterModalOpen && (
+            <EditingTodoComponent closePopup={handleCloseCenterModal} fetchUsers={props.fetchUsers}todo={props.todo}></EditingTodoComponent>
+          )}
+
             </ToDoLabel>
-        )}
+  
         </CenterContainer>
 
         </Row>
         {showDetails && (
-              <ToDoDetails>
-                <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Concluída ? {props.todo.completed ? "Sim." : "Não."}</ToDoDetailsText></Row>
-                <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Criada em: {new Date(props.todo.createdOn).toLocaleString()}</ToDoDetailsText></Row>
-                <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Última modificação: {new Date(props.todo.modifiedOn).toLocaleString()}</ToDoDetailsText></Row>
-                <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Criada por: {props.todo.createdBy}</ToDoDetailsText></Row>
-                <Row><ToDoMarker>&#8226;</ToDoMarker>  <ToDoDetailsText>Modificada por: {props.todo.modifiedBy}</ToDoDetailsText></Row>
-              </ToDoDetails>
-            )}
+  <>
+
+    <ToDoDetails>
+      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Concluída ? {props.todo.completed ? "Sim." : "Não."}</ToDoDetailsText></Row>
+      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Criada em: {new Date(props.todo.createdOn).toLocaleString()}</ToDoDetailsText></Row>
+      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Última modificação: {new Date(props.todo.modifiedOn).toLocaleString()}</ToDoDetailsText></Row>
+      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Criada por: {props.todo.createdBy}</ToDoDetailsText></Row>
+      <Row><ToDoMarker>&#8226;</ToDoMarker>  <ToDoDetailsText>Modificada por: {props.todo.modifiedBy}</ToDoDetailsText></Row>
+    </ToDoDetails>
+  </>
+)}
+{showPopup && (
+      <CenterModal onClose={handleClosePopup}>
+        <ToDoPopupContent>
+          <ToDoPopupTextarea
+            value={updatedTodoText}
+            onChange={(event) => setUpdatedTodoText(event.target.value)}
+          />
+          <ToDoPopupButtonContainer>
+            <ToDoPopupButton onClick={handleUpdate}>Salvar</ToDoPopupButton>
+            <ToDoCancelButton onClick={handleClosePopup}>Cancelar</ToDoCancelButton>
+          </ToDoPopupButtonContainer>
+        </ToDoPopupContent>
+      </CenterModal>
+    )}
+
         {showPopup && (
         <ToDoPopup>
           <ToDoPopupContent>

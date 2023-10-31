@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './AddToDoFormComponent.css';
+import '../../styles/style.sass';
 
 function AddTodoFormComponent(props) {
   const { saveTodo, fetchTodos } = props;
