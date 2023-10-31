@@ -49,13 +49,13 @@ function UsersListPage() {
     try {
       await updateUser(id, updatedUser);
       setReloadAdd([...users]);
-      // Mostra o popup de confirmação com a mensagem desejada
+      
       showConfirmationPopup("Email e senha atualizados com sucesso");
     } catch (error) {
       console.error(error);
     }
   }
-  // Função para mostrar o popup de confirmação
+  
   const showConfirmationPopup = (message) => {
     setConfirmationMessage(message);
     setIsConfirmationPopupVisible(true);
@@ -83,8 +83,6 @@ function UsersListPage() {
   function handleCloseRegisterPopup() {
     setShowRegisterPopup(false);
   }
-
-  
 
    return (
     <div>
@@ -117,7 +115,7 @@ function UsersListPage() {
         {showRegisterPopup && <RegisterPopup onClose={handleCloseRegisterPopup} />}
       </div>
 
-      {/* Exibe o popup de confirmação se isConfirmationPopupVisible for true */}
+     
       {isConfirmationPopupVisible && (
         <ConfirmationPopup
           question={confirmationMessage}

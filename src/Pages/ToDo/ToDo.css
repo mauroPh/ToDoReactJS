@@ -52,7 +52,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Centraliza os Cards na tela */
+    justify-content: center; 
   }
   
   

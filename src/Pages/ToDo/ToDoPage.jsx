@@ -76,7 +76,7 @@ function ToDoPage() {
 
   return (
     <div>
-      <Header title="My ToDo App" />
+      <Header title="Task List" />
       <div className="App">
         <ul className="todo-list">
           {currentItems().map((todo) => (

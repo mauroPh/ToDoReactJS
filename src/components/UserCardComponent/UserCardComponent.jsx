@@ -1,4 +1,4 @@
-import { mdiClose, mdiContentSave } from '@mdi/js';
+import { mdiClose, mdiContentSave, mdiTrashCanOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import React, { useState } from "react";
 import Avatar from 'react-avatar';
@@ -87,7 +87,7 @@ function UserCardComponent(props) {
             {props.user.email}
           </label>
           <button className="delete-button" onClick={handleDelete}>
-            <Icon path={mdiClose} size={0.8} />
+            <Icon path={mdiTrashCanOutline} size={0.8} />
           </button>
           
         </>

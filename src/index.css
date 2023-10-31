@@ -17,4 +17,5 @@ code {
   grid-template-rows: 1fr auto;
   height: calc(100vh - 91px);
   overflow: hidden;
+  color: aquamarine;
 }

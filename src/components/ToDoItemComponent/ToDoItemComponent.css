@@ -88,7 +88,21 @@ transition: background-color 0.3s ease;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: inline-block;
   
+}
+
+.delete-button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-button:first-child {
+  margin-right: 10px;
+}
+
+.delete-button:last-child {
+  margin-left: 10px;
 }
 
 .delete-button:hover {
@@ -114,6 +128,7 @@ transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
   animation: pulsate 1.5s ease-in-out infinite both;
 }
+
 @keyframes pulsate {
   0% {
     transform: scale(1);
@@ -276,10 +291,7 @@ transition: background-color 0.3s ease;
   display: flex;
   flex-direction: column;
   overflow: hidden; /* Adicionado overflow para ocultar conteúdo que estourar o container */
-
-
     border-radius: 10px;
-    display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 8px;
