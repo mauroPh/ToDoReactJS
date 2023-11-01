@@ -65,7 +65,7 @@ function RegisterPage({ closePopup, fetchUsers, user }) {
         </label>
         <label>
           Perfil:
-          <select value={profile} onChange={handleProfileChange}>
+          <select value={profile} onChange={handleProfileChange} className='select-profile'>
             <option value="admin">Admin</option>
             <option value="user">Usuário</option>
           </select>

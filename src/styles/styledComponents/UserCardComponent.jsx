@@ -97,11 +97,11 @@ function UserCardComponent(props,fetchUsers,user) {
             <Icon path={mdiClose} size={0.8} />
           </DeleteButton>
           {isCenterModalOpen && (
-            <CenterModal><RegisterPage closePopup={handleCloseCenterModal} fetchUsers={props.fetchUsers}user={user} /></CenterModal>
+            <CenterModal><RegisterPage closePopup={handleCloseCenterModal} fetchUsers={props.fetchUsers}user={props.user} /></CenterModal>
           )}
        {showPopup && (
         <ConfirmationPopup
-          question={isDeleteConfirmation ? "Tem certeza que deseja excluir?" : "Tem certeza que deseja alterar o status da tarefa?"}
+          question={"Tem certeza que deseja excluir?"}
           onConfirm={handleConfirmPopup}
           onCancel={handleClosePopup}
         />

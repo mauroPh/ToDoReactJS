@@ -1,4 +1,4 @@
-import { mdiChevronDown, mdiChevronRight, mdiClose } from '@mdi/js';
+import { mdiChevronDown, mdiChevronLeft, mdiClose } from '@mdi/js';
 import Icon from '@mdi/react';
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -9,14 +9,15 @@ import EditingTodoComponent from "./EditingTodoComponent";
 
 
 const ToDoItem = styled.div`
+ position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: space-evenly;
   margin-bottom: 10px;
   padding: 15px;
   border-radius: 5px;
   background-color: ${props => props.completed ? "#e6e6e6" : "#fff"};
-  box-shadow: 0 2px 2px rgba(3, 73, 251, 0.641);
+  box-shadow: 0 1px 1px rgba(3, 73, 251, 0.641);
 
 `;
 
@@ -24,19 +25,14 @@ const ToDoCheckbox = styled.input`
 margin-top: 4px;
 margin-right: 10px;
 align-self: flex-start;
+cursor: pointer;
 `;
-
 
 const ToDoLabelWrapper = styled.div`
 display: flex;
 flex-grow: 1;
 align-items: center;`;
 
-const CenterContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-`;
 const Column = styled.div`
   display: flex;
   width: 100%;
@@ -51,105 +47,33 @@ const Row = styled.div`
   width: 100%;
 `;
 
-const ToDoArrow = styled(Icon)`
-  margin-right: 2px;
-  align-self: flex-start;
-  cursor: pointer;
-`;
-
-const ToDoLabel = styled.label`
-align-self: flex-start;
-margin-right: 10px;
-  cursor: pointer;
-  text-decoration: ${(props) => (props.completed ? "line-through" : "none")};
-  white-space: nowrap;
-`;
-const ToDoLabelInput = styled.input`
-  align-self: flex-start;
+const ToDoLabel = styled.div`
+  width: min(calc(70vw - 150px), 80vw);
+  align-self: center;
   margin-right: 10px;
   cursor: pointer;
   text-decoration: ${(props) => (props.completed ? "line-through" : "none")};
-  white-space: nowrap;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 2px;
-  margin-bottom: 16px;
-  resize: vertical;
-`;
+  white-space: nowrap;  
+  overflow: hidden;
+  `;
 
-
-
-const ToDoPopup = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-`;
-
-const ToDoPopupContent = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ToDoPopupTextarea = styled.textarea`
-  margin-bottom: 10px;
-  resize: none;
-`;
-
-const ToDoPopupButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const ToDoPopupButton = styled.button`
-  background-color: #0077ff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
-`;
-
-const ToDoCancelButton = styled.button`
-  background-color: #fff;
-  color: #0077ff;
-  border: 1px solid #0077ff;
-  border-radius: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
-`;
-
-const EditButton = styled.button`
-position:relative;
-justify-content: center;
-align-items: center;
-align-self: Center;
-  background-color: #fff;
-  color: #0077ff;
-  border: 1px solid #FFFFFF;
-  box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
-
-  border-radius: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
-  margin-left: 10px;
-`;
+  const DescriptionContainer = styled.div`
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
+  font-size: clamp(12px, 2vw, 1rem);
+  `;
 
 const ToDoDetails = styled.div`
   position:relative;
-  left: 50%;
+  left: 85%;
   transform: translate(-50%);
   border-radius: 5px;
-  background-color: #f2f2f2;
+  background-color: transparent;
   white-space: nowrap;
   align-self: flex-start;
-  margin-left: 0px;
-  padding-top: 5px;
   padding-left: 10px;
   padding-right: 10px;
 
@@ -160,9 +84,7 @@ const ToDoDetailsText = styled.p`
   padding-right: 5px;
   padding-bottom: 2px;
   margin: 0;
-  font-size: 0.9rem;
-  box-shadow: 0 0.5px 0 rgba(3, 73, 251, 0.641);
-
+  font-size: clamp(12px, 2vw, 1rem);
 `;
 
 const ToDoMarker = styled.div`
@@ -171,6 +93,9 @@ const ToDoMarker = styled.div`
 `;
 
 const ToDoDeleteButton = styled.button`
+  position: absolute;
+  top: 15px;
+  right: 20px;
   align-self: flex-start;
   margin-left: 10px;
   background-color: transparent;
@@ -186,29 +111,30 @@ align-self: flex-start;
   cursor: pointer;
 }
 `;
+const ToDoArrow = styled(Icon)`
+position: absolute;
+top: 15px;
+right: 100px;
+  margin-right: 2px;
+  align-self: flex-start;
+  cursor: pointer;
+`;
+const ShowMoreText = styled.span`
+position: absolute;
+top: 20px;
+right: 50px;
+font-size: 0.6em;
+  color: blue;
+  padding-right: 5px;
+  cursor: pointer;
+`;
 
 function ToDoItemComponent(props) {
-  console.log("ToDoItemComponent props:", props);
-  const [isEditing, setIsEditing] = useState(false);
-  const [updatedTodoText, setUpdatedTodoText] = useState(props.todo.description);
   const [showPopup, setShowPopup] = useState(false);
   const [isDeleteConfirmation, setIsDeleteConfirmation] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
-  const [isCenterModalOpen, setIsCenterModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-  function handleUpdate() {
-    const updatedTodo = { ...props.todo, description: updatedTodoText };
-    props.handleUpdate(props.todo.todoId, updatedTodo);
-    setIsEditing(false);
-    handleClosePopup();
-  }
-  
-  function handleCancel() {
-    setIsEditing(false);
-    setUpdatedTodoText(props.todo.description);
-    handleClosePopup();
-  }
 
   const handleDelete = async () => {
     setIsDeleteConfirmation(true);
@@ -216,22 +142,15 @@ function ToDoItemComponent(props) {
   };
 
   const handleDescriptionClick = () => {
-    setIsEditing(true);
-    setShowDetails(!showDetails);
+    setIsModalOpen(true);
   };
 
   const handleArrowClick = () => {
-    setIsEditing(false);
     setShowDetails(!showDetails);
   };
 
-
-  const handleOpenCenterModal = () => {
-    setIsCenterModalOpen(true);
-  };
-
-  const handleCloseCenterModal = () => {
-    setIsCenterModalOpen(false);
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   const handleCheckboxChange = () => {
@@ -272,78 +191,40 @@ function ToDoItemComponent(props) {
             checked={props.todo.completed}
             onChange={handleCheckboxChange}
           />
-       
           <ToDoLabelWrapper>
+         
         <Column>
-        <Row>
-          <CenterContainer>
-        <ToDoArrow
-                path={showDetails ? mdiChevronDown : mdiChevronRight}
-                size={0.8}
-                onClick={handleArrowClick}
-              />
-              
-            <ToDoLabel
-              completed={props.todo.completed}
-              onClick={handleDescriptionClick}
-            >
-            {props.todo.description}
-            {showDetails && <EditButton onClick={handleOpenCenterModal}>Editar</EditButton>}
-            {isCenterModalOpen && (
-            <EditingTodoComponent closePopup={handleCloseCenterModal} fetchUsers={props.fetchUsers}todo={props.todo}></EditingTodoComponent>
-          )}
-
+            <ToDoLabel completed={props.todo.completed}>
+              <DescriptionContainer onClick={handleDescriptionClick}>
+              {props.todo.description}
+            </DescriptionContainer>
             </ToDoLabel>
-  
-        </CenterContainer>
-
-        </Row>
+            
+      {isModalOpen && (
+        <CenterModal onClose={handleCloseModal}>
+          <EditingTodoComponent todo={props.todo} closePopup={handleCloseModal} fetchTodos={props.fetchTodos} />    
+        </CenterModal>)}
         {showDetails && (
   <>
-
     <ToDoDetails>
       <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Concluída ? {props.todo.completed ? "Sim." : "Não."}</ToDoDetailsText></Row>
-      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Criada em: {new Date(props.todo.createdOn).toLocaleString()}</ToDoDetailsText></Row>
-      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Última modificação: {new Date(props.todo.modifiedOn).toLocaleString()}</ToDoDetailsText></Row>
-      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Criada por: {props.todo.createdBy}</ToDoDetailsText></Row>
+      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Criada em: {new Date(props.todo.createdOn).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}</ToDoDetailsText></Row>
+      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Última modificação: {new Date(props.todo.modifiedOn).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}</ToDoDetailsText></Row>      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Criada por: {props.todo.createdBy}</ToDoDetailsText></Row>
       <Row><ToDoMarker>&#8226;</ToDoMarker>  <ToDoDetailsText>Modificada por: {props.todo.modifiedBy}</ToDoDetailsText></Row>
     </ToDoDetails>
   </>
 )}
-{showPopup && (
-      <CenterModal onClose={handleClosePopup}>
-        <ToDoPopupContent>
-          <ToDoPopupTextarea
-            value={updatedTodoText}
-            onChange={(event) => setUpdatedTodoText(event.target.value)}
-          />
-          <ToDoPopupButtonContainer>
-            <ToDoPopupButton onClick={handleUpdate}>Salvar</ToDoPopupButton>
-            <ToDoCancelButton onClick={handleClosePopup}>Cancelar</ToDoCancelButton>
-          </ToDoPopupButtonContainer>
-        </ToDoPopupContent>
-      </CenterModal>
-    )}
-
-        {showPopup && (
-        <ToDoPopup>
-          <ToDoPopupContent>
-            <ToDoPopupTextarea
-              value={updatedTodoText}
-              onChange={(event) => setUpdatedTodoText(event.target.value)}
-            />
-            <ToDoPopupButtonContainer>
-              <ToDoPopupButton onClick={handleUpdate}>Salvar</ToDoPopupButton>
-              <ToDoCancelButton onClick={handleClosePopup}>Cancelar</ToDoCancelButton>
-            </ToDoPopupButtonContainer>
-          </ToDoPopupContent>
-        </ToDoPopup>
-      )}
         </Column>
           </ToDoLabelWrapper>
-          
-
-          
+          <div style={{ display: 'flex',alignItems:'stretch'} } onClick={handleArrowClick}>
+         <Row>
+         <ToDoArrow
+            path={showDetails ? mdiChevronDown : mdiChevronLeft}
+            size={0.8}/>
+          <ShowMoreText>{showDetails ? 'Ocultar' : 'Detalhes'}</ShowMoreText>
+         </Row>
+         
+        </div>
           <ToDoDeleteButton onClick={handleDelete}>
             <Icon path={mdiClose} size={0.8} />
           </ToDoDeleteButton>

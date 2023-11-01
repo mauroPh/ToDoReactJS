@@ -1,3 +1,5 @@
+import { mdiAccountPlus } from '@mdi/js';
+import Icon from '@mdi/react';
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import Header from "../../components/Header/Header";
@@ -114,7 +116,7 @@ function UsersPage() {
         />
 
         <button className="add-user-button" onClick={() => setShowRegisterPopup(true)}>
-          Adicionar usuário
+        <Icon path={mdiAccountPlus} size={1} />
         </button>
         {showRegisterPopup && <CenterModal><RegisterPage closePopup={handleCloseRegisterPopup} fetchUsers={fetchUsers} /></CenterModal>}
         {userToDelete && (

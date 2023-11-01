@@ -23,7 +23,9 @@
       box-shadow: 0 0 0px 0 rgba(16, 113, 117, 0.4);
      
   
-
+.todo-list
+  margin: 10px;
+  padding: 10px;
 
 
 // Estilos para .header
@@ -268,6 +270,30 @@ select
   font-size: 16px;
   padding: 5px;
 
+.popup-save-note
+  position: absolute;
+  bottom: 95px;
+  right: 45px;
+  background-color: #c4ffb4;
+  font-size: clamp(12px, 0.8vw, 1rem);
+  border-radius: 12px;
+  padding: 10px;
+
+.button-close-popup
+ position: absolute;
+ background-color: transparent;
+ border: none;
+ bottom: 60px;
+ right: 0px;
+
+.popup-alert
+  position: absolute;
+  bottom: 95px;
+  right: 45px;
+  background-color: rgba(255, 105, 97, 0.8);
+  font-size: clamp(12px, 0.8vw, 1rem);
+  border-radius: 12px;
+  padding: 10px;
  
 .popup-header
   display: flex;
@@ -292,11 +318,11 @@ select
  
 .add-user-button  
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 30px;
+  right: 30px;
   align-items: center;
   justify-content: center;
-  background-color: rgba(55, 61, 75, 0.641);
+  background-color: rgba(55, 61, 75, 0.8);
   box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
   color: #fff;
   border: none;
@@ -307,7 +333,7 @@ select
   cursor: pointer;
   transition: background-color 0.3s ease;
 
-.pagination 
+.pagination
   display: flex;
   justify-content: center;
   margin-top: 20px;
@@ -318,21 +344,33 @@ select
   margin-left: auto;
   margin-right: auto;
 
-  li 
+  li
+    background-color : #fff;
     display: inline-block;
     margin: 0 5px;
     cursor: pointer;
 
-    a 
+    a
       padding: 5px 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
+      background-color : #fff;
 
       &.active
         background-color: #ccc;
 
   &.with-add-todo-form
       bottom: 85px;
+
+.select-profile
+  background-color: #EBEAEA;
+  border-color: #ddd;
+  border-radius: 30px;
+  padding: 10px;
+  font-size: 16px;
+
+
+
 
 
       

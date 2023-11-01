@@ -10,7 +10,7 @@ function ToDoPage() {
   const [todos, setTodos] = useState([]);
   const [reloadAdd, setReloadAdd] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(7);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
   async function fetchTodos() {
     try {
@@ -76,7 +76,7 @@ function ToDoPage() {
 
   return (
     <div>
-      <Header title="My ToDo App" />
+      <Header title="ToDo App" />
       <div className="App">
         <ul className="todo-list">
           {currentItems().map((todo) => (

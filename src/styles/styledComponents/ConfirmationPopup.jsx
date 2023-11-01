@@ -11,6 +11,7 @@ const PopupContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 `;
 
 const PopupContent = styled.div`
@@ -43,17 +44,28 @@ const CancelButton = styled.button`
   background-color: #fff;
   border: 1px solid #000;
   border-radius: 30px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
   padding: 0.5rem 1rem;
   cursor: pointer;
+
+  &:hover {
+    background-color: #e6e6e6;
+  }
 `;
 
 const ConfirmButton = styled.button`
-background-color: rgba(230, 0, 10);
-color: #fff;
+  background-color: rgba(230, 0, 10);
+  box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
+  color: #fff;
+  border: none;
   border-radius: 30px;
   padding: 0.5rem 1rem;
   cursor: pointer;
-`;
+
+  &:hover{
+  background-color: #8a0c0c;
+  }`;
 
 const ConfirmationPopup = ({ question, onConfirm, onCancel }) => {
   return (
