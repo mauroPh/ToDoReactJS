@@ -19,5 +19,25 @@
   box-shadow: 0 0 0px 0 rgba(16, 113, 117, 0.4);
 }
 
+.success-popup {
+  background-color: #4CAF50; 
+  color: white; 
+  padding: 10px; 
+  border-radius: 5px; 
+  position: inherit;
+  bottom: 20px; 
+  right: 20px; 
+  z-index: 999; 
+}
+
+.error-popup {
+  background-color: #f44336; 
+  color: white; 
+  padding: 10px; 
+  border-radius: 5px; 
+  position: inherit;
+  z-index: 999; 
+}
+
 
  

@@ -2,18 +2,34 @@ import React, { useState } from 'react';
 import './AddToDoFormComponent.css';
 
 function AddTodoFormComponent(props) {
-  const { saveTodo,  } = props;
+  const { saveTodo } = props;
   const [todoText, setTodoText] = useState('');
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      console.log('Enter key pressed', todoText.trim());
-      saveTodo({
-        description: todoText.trim(),
-        completed: false,
-      });
-      setTodoText('');
+      const trimmedText = todoText.trim();
+
+      if (trimmedText === '') {
+        setShowErrorPopup(true);
+
+        setTimeout(() => {
+          setShowErrorPopup(false);
+        }, 2400);
+      } else {
+        saveTodo({
+          description: trimmedText,
+          completed: false,
+        });
+        setTodoText('');
+        setShowSuccessPopup(true);
+
+        setTimeout(() => {
+          setShowSuccessPopup(false);
+        }, 2400);
+      }
     }
   };
 
@@ -34,7 +50,19 @@ function AddTodoFormComponent(props) {
           backgroundPosition: '10px center',
           paddingLeft: '20px',
         }}
-        />
+      />
+
+      {showSuccessPopup && (
+        <div className="success-popup">
+          Tarefa criada com sucesso!
+        </div>
+      )}
+
+      {showErrorPopup && (
+        <div className="error-popup">
+          Você precisa adicionar uma descrição para a tarefa.
+        </div>
+      )}
     </div>
   );
 }
