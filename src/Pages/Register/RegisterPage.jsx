@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { addUser } from "../UsersList/UsersRepository";
 import { logout } from "../../services/auth";
 
-function RegisterPage({onClose}) {
+function RegisterPage({ onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [profile, setProfile] = useState("684fd078-c7ba-4204-a133-1546f61ebda9");
-  const [registrationSuccess, setRegistrationSuccess] = useState(false); 
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -22,14 +24,30 @@ function RegisterPage({onClose}) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const user = await addUser({ email, password, profile });
-      if (user) {
-        logout();
-        setRegistrationSuccess(true);
+
+  
+    if (!email) {
+      setEmailError(<span style={{color: "red"}}>Preencha o campo de email</span>);
+    } else {
+      setEmailError("");
+    }
+
+    if (!password) {
+      setPasswordError(<span style={{color: "red"}}>Preencha o campo de senha</span>);
+    } else {
+      setPasswordError("");
+    }
+
+    if (email && password) {
+      try {
+        const user = await addUser({ email, password, profile });
+        if (user) {
+          logout();
+          setRegistrationSuccess(true);
+        }
+      } catch (error) {
+        console.error("Erro no registro: ", error);
       }
-    } catch (error) {
-      console.error("Erro no registro: ", error);
     }
   };
 
@@ -38,11 +56,13 @@ function RegisterPage({onClose}) {
   };
 
   return (
-    <div >
+    <div>
       {registrationSuccess ? (
         <div>
           <p>Usuário criado com sucesso!</p>
-          <button className="reg-user-button" onClick={handleOK}>OK</button>
+          <button className="reg-user-button" onClick={handleOK}>
+            OK
+          </button>
         </div>
       ) : (
         <div className="popup-container">
@@ -54,10 +74,12 @@ function RegisterPage({onClose}) {
             <label>
               E-mail:
               <input type="text" value={email} onChange={handleEmailChange} />
+              <div className="error-message">{emailError}</div>
             </label>
             <label>
               Senha:
               <input type="password" value={password} onChange={handlePasswordChange} />
+              <div className="error-message">{passwordError}</div>
             </label>
             <label className="profile-label">
               Perfil:
@@ -66,7 +88,9 @@ function RegisterPage({onClose}) {
                 <option value="admin">Admin</option>
               </select>
             </label>
-            <button type="submit" className="login-button">Criar Conta</button>
+            <button type="submit" className="login-button">
+              Criar Conta
+            </button>
           </form>
         </div>
       )}
