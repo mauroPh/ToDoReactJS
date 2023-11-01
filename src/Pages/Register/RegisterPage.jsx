@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { addUser } from "../UsersList/UsersRepository";
 import { logout } from "../../services/auth";
+import "./Register.css";
 
 function RegisterPage({onClose}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [profile, setProfile] = useState("684fd078-c7ba-4204-a133-1546f61ebda9");
   const [registrationSuccess, setRegistrationSuccess] = useState(false); 
+  const [emailError, setEmailError] = useState("");
+const [passwordError, setPasswordError] = useState("");
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -22,6 +25,20 @@ function RegisterPage({onClose}) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setEmailError("");
+    setPasswordError("");
+    
+    if (!email) {
+      setEmailError("Por favor, insira um endereço de e-mail.");
+    }
+    if (!password) {
+      setPasswordError("Por favor, insira uma senha.");
+    }
+  
+    if (!email || !password) {
+      return;
+    }
+  
     try {
       const user = await addUser({ email, password, profile });
       if (user) {
@@ -32,6 +49,7 @@ function RegisterPage({onClose}) {
       console.error("Erro no registro: ", error);
     }
   };
+  
 
   const handleOK = () => {
     window.location.replace("/login");
@@ -51,14 +69,16 @@ function RegisterPage({onClose}) {
             X
           </button>
           <form onSubmit={handleSubmit}>
-            <label>
-              E-mail:
-              <input type="text" value={email} onChange={handleEmailChange} />
-            </label>
-            <label>
-              Senha:
-              <input type="password" value={password} onChange={handlePasswordChange} />
-            </label>
+  <label>
+    E-mail:
+    <input type="text" value={email} onChange={handleEmailChange} />
+    {emailError && <div style={{ color: "red" }}>{emailError}</div>}
+  </label>
+  <label>
+    Senha:
+    <input type="password" value={password} onChange={handlePasswordChange} />
+    {passwordError && <div style={{ color: "red" }}>{passwordError}</div>}
+  </label>
             <label className="profile-label">
               Perfil:
               <select value={profile} onChange={handleProfileChange}>

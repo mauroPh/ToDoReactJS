@@ -1,16 +1,28 @@
-import { mdiClose, mdiContentSave } from '@mdi/js';
+import { mdiClose, mdiContentSave, mdiCheck } from '@mdi/js';
 import Icon from '@mdi/react';
 import React, { useState } from "react";
 import Avatar from 'react-avatar';
 import { deleteUser } from "../../Pages/UsersList/UsersRepository";
 import "../ToDoItemComponent/ToDoItemComponent.css";
+import "./UserCardComponent.css";
 
 function UserCardComponent(props) {
   const [isEditing, setIsEditing] = useState(false);
   const [updatedEmail, setUpdatedEmail] = useState(props.user.email);
   const [updatedPassword, setUpdatedPassword] = useState(props.user.password);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
 
   function handleUpdate() {
+    if (!isValidEmail(updatedEmail)) {
+      console.log('O email informado não tem o formato de um email válido.');
+      return;
+    }
+
     const updatedUser = {
       ...props.user,
       email: updatedEmail,
@@ -26,14 +38,25 @@ function UserCardComponent(props) {
     setUpdatedPassword(props.user.password);
   }
 
-  const handleDelete = async () => {
-    try {
-      await deleteUser(props.user.userId);
-      props.fetchUsers();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  function handleDelete() {
+    setShowConfirmation(true);
+  }
+
+  function handleDeleteConfirmation() {
+    deleteUser(props.user.userId)
+      .then(() => {
+        props.fetchUsers();
+
+        setShowConfirmation(false);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  function handleDeleteCancel() {
+    setShowConfirmation(false);
+  }
 
   const handleDescriptionClick = () => {
     setIsEditing(true);
@@ -49,28 +72,15 @@ function UserCardComponent(props) {
 
   return (
     <div className="todo-item">
-      {isEditing ? (
+      {showConfirmation ? (
         <div className="popup">
           <div className="popup-content">
-            <h5>E-mail</h5>
-            <input
-              type="text"
-              value={updatedEmail}
-              onChange={(event) => setUpdatedEmail(event.target.value)}
-              onKeyDown={handleKeyDown}
-            />
-            <h5>Senha</h5>
-            <input
-              type="password"
-              value={updatedPassword}
-              onChange={(event) => setUpdatedPassword(event.target.value)}
-              onKeyDown={handleKeyDown}
-            />
+            <h5>Tem certeza que deseja excluir este usuário?</h5>
             <div className="button-container">
-              <button className="popup-content button" onClick={handleUpdate}>
-                <Icon path={mdiContentSave} size={1} />
+              <button className="popup-content button button-success" onClick={handleDeleteConfirmation}>
+              <Icon path={mdiCheck} size={1} />
               </button>
-              <button className="popup-content button" onClick={handleCancel}>
+              <button className="popup-content button button-danger" onClick={handleDeleteCancel}>
                 <Icon path={mdiClose} size={1} />
               </button>
             </div>
@@ -78,13 +88,42 @@ function UserCardComponent(props) {
         </div>
       ) : (
         <>
-          <Avatar name={props.user.email} size="50" round={true} />
+          <Avatar name={props.user.email} size="50" round={false} />
           <label className="todo-label" onClick={handleDescriptionClick}>
             {props.user.email}
           </label>
-          <button className="delete-button" onClick={handleDelete}>
-            <Icon path={mdiClose} size={0.8} />
-          </button>
+          {isEditing ? (
+            <div className="popup">
+              <div className="popup-content">
+                <h5>E-mail</h5>
+                <input
+                  type="text"
+                  value={updatedEmail}
+                  onChange={(event) => setUpdatedEmail(event.target.value)}
+                  onKeyDown={handleKeyDown}
+                />
+                <h5>Senha</h5>
+                <input
+                  type="password"
+                  value={updatedPassword}
+                  onChange={(event) => setUpdatedPassword(event.target.value)}
+                  onKeyDown={handleKeyDown}
+                />
+                <div className="button-container">
+                  <button className="popup-content button" onClick={handleUpdate}>
+                    <Icon path={mdiContentSave} size={1} />
+                  </button>
+                  <button className="popup-content button" onClick={handleCancel}>
+                    <Icon path={mdiClose} size={1} />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <button className="delete-button" onClick={handleDelete}>
+              <Icon path={mdiClose} size={0.8} />
+            </button>
+          )}
         </>
       )}
     </div>

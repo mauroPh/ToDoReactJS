@@ -50,6 +50,10 @@
     overflow: hidden;
     overflow-y: auto;
   }
+  .list-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
   
   
   .pagination {
@@ -72,4 +76,14 @@
   
   .pagination li.active a {
     background-color: #ccc;
+  }
+
+  .success-alert {
+    color: green;
+  
+  }
+  
+  .alert {
+    color: red;
+   
   }

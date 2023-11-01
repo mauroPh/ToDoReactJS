@@ -5,7 +5,6 @@
     flex-direction: row;
     z-index: 3;
     align-content: center;
-
 }
 
 body{
@@ -80,6 +79,7 @@ body{
     border-radius: 10px;
     box-shadow: 0 2px 3px 1px rgba(0, 0, 0, .2);
     z-index: 4;
+    gap: 12px
 }
 
 .delete-button {

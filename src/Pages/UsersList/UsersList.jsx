@@ -78,7 +78,8 @@ function UsersListPage() {
     <div>
       <Header title="Gerenciar usuários" />
       <div className="App">
-        <ul className="todo-list">
+        <div className="todo-list">
+        <div className="list-container">
           {currentItems().map((user) => (
            <UserCardComponent
            key={user.id}
@@ -89,15 +90,18 @@ function UsersListPage() {
          />
          
           ))}
-        </ul>
-        <ReactPaginate
-          pageCount={pageCount()}
-          onPageChange={handlePageClick}
-          containerClassName={"pagination"}
-          activeClassName={"active"}
-          previousLabel={"← Anterior"}
-          nextLabel={"Próxima →"}
-        />
+        </div>
+        </div>
+        {pageCount() > 1 && ( 
+          <ReactPaginate
+            pageCount={pageCount()}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination"}
+            activeClassName={"active"}
+            previousLabel={"← Anterior"}
+            nextLabel={"Próxima →"}
+          />
+        )}
         <button className="add-user-button" onClick={() => setShowRegisterPopup(true)}>
           Adicionar usuário
         </button>

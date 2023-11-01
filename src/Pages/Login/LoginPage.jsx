@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import iconToDo from '../../assets/lista-de-afazeres.png';
+import iconToDo from '../../assets/todo.svg';
 import "./Login.css";
 import { getUserInfo } from "./LoginRepository";
 
@@ -35,8 +35,9 @@ function Login() {
 
   return (
     <div className="login-container">
-      <p>To-Do App</p>
-      <h1 className="login-title">Fazer login</h1>
+     <img src={iconToDo} alt="Minha Imagem" className='imagem-fixa' style={{ width: '100px', height: '100px' }}/>
+      <p>To Do</p>
+      <h1 className="login-title">Login</h1>
       <form onSubmit={handleSubmit}>
         <label className={`label-${usernameLabelPosition}`}>
           E-mail:
@@ -54,15 +55,12 @@ function Login() {
             onChange={handlePasswordChange}
           />
         </label>
-        <p className="text-display-medium">
-          Esqueceu seu email ou sua senha?
-          <a href="cadastro.html">Clique aqui</a>
-        </p>
+        
 
           <div className='button-separator'></div>
-          <button type="submit" className="login-button">Acessar</button>
+          <button type="submit" className="login-button">Entrar</button>
        
-        <img src={iconToDo} alt="Minha Imagem" className='imagem-fixa'/>
+       
       </form>
     </div>
   );

@@ -1,36 +1,45 @@
-import { mdiClose, mdiContentSave } from '@mdi/js';
+import { mdiClose, mdiContentSave, mdiCheck } from '@mdi/js';
 import Icon from '@mdi/react';
 import React, { useState } from "react";
 import { deleteTodo } from "../../Pages/ToDo/ToDoRepository";
-import "./ToDoItemComponent.css"
-
-
+import "./ToDoItemComponent.css";
 
 function ToDoItemComponent(props) {
   console.log("ToDoItemComponent props:", props);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedTodoText, setUpdatedTodoText] = useState(props.todo.description);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
 
   function handleUpdate() {
     const updatedTodo = { ...props.todo, description: updatedTodoText };
     props.handleUpdate(props.todo.todoId, updatedTodo);
     setIsEditing(false);
   }
-  
 
   function handleCancel() {
     setIsEditing(false);
     setUpdatedTodoText(props.todo.description);
   }
 
-  const handleDelete = async () => {
+  function handleDelete() {
+    setShowConfirmation(true);
+
+  }
+
+  const handleDeleteConfirmation = async () => {
     try {
       await deleteTodo(props.todo.todoId);
       props.fetchTodos();
+      setShowConfirmation(false);
     } catch (error) {
       console.error(error);
     }
-  };
+  }
+
+  function handleDeleteCancel() {
+    setShowConfirmation(false);
+  }
 
   const handleDescriptionClick = () => {
     setIsEditing(true);
@@ -44,41 +53,67 @@ function ToDoItemComponent(props) {
   };
 
   return (
-    <div className={props.todo.completed ? "todo-item todo-item-completed" : "todo-item"}>
-      {isEditing ? (
+    <>
+      {showConfirmation ? (
         <div className="popup">
-        <div className="popup-content">
-          <textarea
-            value={updatedTodoText}
-            onChange={(event) => setUpdatedTodoText(event.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-          <div className="button-container">
-            <button className="popup-content button" onClick={handleUpdate}><Icon path={mdiContentSave} size={1} /></button>
-            <button className="popup-content button" onClick={handleCancel}><Icon path={mdiClose} size={1} /></button>
+          <div className="popup-content">
+            <h5>Tem certeza que deseja excluir esta tarefa?</h5>
+            <div className="button-container">
+              <button className="popup-content button button-success" onClick={handleDeleteConfirmation}>
+                <Icon path={mdiCheck} size={1} />
+              </button>
+              <button className="popup-content button button-danger" onClick={handleDeleteCancel}>
+                <Icon path={mdiClose} size={1} />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       ) : (
-        <>
-          <input
-            type="checkbox"
-            checked={props.todo.completed}
-            onChange={() => props.handleCheckboxChange(props.todo.todoId, !props.todo.complete)}
-          />
-          <label
-            className={props.todo.completed ? "todo-label todo-label-completed" : "todo-label"}
-            onClick={handleDescriptionClick}
-          >
-            {props.todo.description}
-          </label>
-          <button className={props.todo.completed ? "delete-button delete-button-completed" : "delete-button"} onClick={handleDelete}>
-            <Icon path={mdiClose} size={0.8} />
+
+        <div className={props.todo.completed ? "todo-item todo-item-completed" : "todo-item"}>
+          {isEditing ? (
+            <div className="popup">
+              <div className="popup-content">
+                <textarea
+                  value={updatedTodoText}
+                  onChange={(event) => setUpdatedTodoText(event.target.value)}
+                  onKeyDown={handleKeyDown}
+                />
+                <div className="button-container">
+                  <button className="popup-content button button-success" onClick={handleUpdate}>
+                    <Icon path={mdiContentSave} size={1} />
+                  </button>
+                  <button className="popup-content button button-danger" onClick={handleCancel}>
+                    <Icon path={mdiClose} size={1} />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <>
+         
+              <input
+                type="checkbox"
+                checked={props.todo.completed}
+                onChange={() => props.handleCheckboxChange(props.todo.todoId, !props.todo.complete)}
+              />
+              <label
+                className={props.todo.completed ? "todo-label todo-label-completed" : "todo-label"}
+                onClick={handleDescriptionClick}
+              >
+                {props.todo.description}
+              </label>
+
+              <button className={props.todo.completed ? "delete-button delete-button-completed" : "delete-button"} onClick={handleDelete}>
+
+                <Icon path={mdiClose} size={0.8} />
+
+              </button>
             
-          </button>
-        </>
-      )}
-    </div>
+            </>
+          )}
+        </div>
+      )}</>
   );
 }
 

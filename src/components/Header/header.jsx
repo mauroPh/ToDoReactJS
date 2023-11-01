@@ -40,9 +40,7 @@ const Header = ({ title, userEmail }) => {
         <div className="user-info">
           <p>{user.email}</p>
           <button className="login-button" onClick={handleLandPage}>ToDo's</button>
-          <div className='button-separator'></div>
           <button className="login-button" onClick={handleUsersListPage}>Usuários</button>
-          <div className='button-separator'></div>
           <button className="register-button" onClick={handleLogout}>Sair</button>
         </div>
       )}

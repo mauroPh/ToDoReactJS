@@ -44,6 +44,7 @@ font-size: smaller;
     flex-direction: column;
     margin-bottom: 1rem;
     border: #8a0c0c;
+    word-wrap: break-word;
   }
   
   input {
@@ -65,9 +66,8 @@ font-size: smaller;
     justify-content: center;
     width: 80%;    margin: 0 0.2rem;
     padding: 0.5rem;
-    background-color: rgba(230, 0, 10);
+    background-color:  #4763E4;
     box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
-
     color: #fff;
     border: none;
     border-radius: 30px;
@@ -79,7 +79,7 @@ font-size: smaller;
   }
   
   .login-button:hover {
-    background-color: #8a0c0c;
+    background-color:  #4763a4;
   }
   .button-separator {
     width: 40px;

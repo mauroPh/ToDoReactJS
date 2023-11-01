@@ -1,108 +1,111 @@
 .todo-item {
-  background-color: #fff;
+  background-color: #f7f7f7;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
+  box-shadow: 0 2px 4px rgb(177 178 182 / 64%);
+  display: flex;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
   padding: 16px;
   text-align: center;
+  transition: 0.15s ease-in-out;
+  overflow: hidden;
 }
 
-.todo-item-completed{
-    background-color: #e3e0e0;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    padding: 16px;
-    text-align: center;
-  }
+.todo-item-completed {
+  background-color:  rgb(201 219 200);
+  border-radius: 10px;
+  box-shadow: 0 1px 3px 1px #18864B;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 16px;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+}
 
-  .add-user-button {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    align-items: center;
+.add-user-button {
+  position: fixed;
+  top: 26px;
+  right: 20px;
+  align-items: center;
   justify-content: center;
-  
-  background-color:  rgba(55, 61, 75, 0.641);
+  background-color: rgb(51 122 49 / 64%);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reg-user-button {
+
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+
+  background-color: rgba(55, 61, 75, 0.641);
   box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
 
   color: #fff;
   border: none;
   border-radius: 30px;
-  padding: 6px ;
+  padding: 6px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  }
-
-.reg-user-button{   
- 
-  align-items: center;
-justify-content: center;
-width: 80%;
-
-background-color:  rgba(55, 61, 75, 0.641);
-box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
-
-color: #fff;
-border: none;
-border-radius: 30px;
-padding: 6px ;
-font-size: 14px;
-font-weight: 600;
-cursor: pointer;
-transition: background-color 0.3s ease;
 }
 
-    .popup-container {
-      max-height: 70%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 500px;
-      background-color: rgb(255, 255, 255);
-      max-width: 500px;
-      min-width: 450px;
-      padding: 50px 25px;
-      position: relative;
-      border-radius: 30px;
-   
-  }
+.popup-container {
+  max-height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  background-color: rgb(255, 255, 255);
+  max-width: 500px;
+  min-width: 450px;
+  padding: 50px 25px;
+  position: relative;
+  border-radius: 30px;
 
-  .popup-content h5 {
-    margin: 10px 5px 10px 5px;; 
-    padding-bottom: 5px; 
-  }
-  .popup-content input {
-    padding: 5px; 
-    margin-bottom: 10px; 
-  }
+}
+
+.popup-content h5 {
+  margin: 10px 5px 10px 5px;
+  ;
+  padding-bottom: 5px;
+}
+
+.popup-content input {
+  padding: 5px;
+  margin-bottom: 10px;
+}
 
 
 .button-close {
-    position: absolute;
-    top: 15px; 
-    right: 15px;
-    width: 30px;
-    height: 30px;
-    background-color: rgba(230, 0, 10);
-    box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    padding: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(230, 0, 10);
+  box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .delete-button {
@@ -116,12 +119,40 @@ transition: background-color 0.3s ease;
   color: #fff;
   border: none;
   border-radius: 30px;
-  padding: 6px ;
+  padding: 6px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  
+  position: relative;
+}
+button.delete-button:before {
+  content: "";
+  width: 67px;
+  position: absolute;
+  top: -100vh;
+  bottom: -100vh;
+  right: -16px;
+  z-index: 0;
+  background: linear-gradient(270deg, transparent, transparent);
+  border-radius: 0 8px 8px 0;
+  animation-fill-mode: forwards;
+}
+
+button.delete-button:hover:before {
+  animation: easyBackground 0.2s ease-in-out forwards;
+  background: linear-gradient(270deg, #f5797f, transparent);
+}
+
+@keyframes easyBackground {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 67px;
+    opacity: 1;
+  }
 }
 
 .delete-button:hover {
@@ -135,25 +166,28 @@ transition: background-color 0.3s ease;
   justify-content: center;
   width: 30px;
   height: 30px;
-  background-color: rgb(166, 54, 58) ;
+  background-color: rgb(166, 54, 58);
   box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
   color: #fff;
   border: none;
   border-radius: 30px;
-  padding: 6px ;
+  padding: 6px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
   animation: pulsate 1.5s ease-in-out infinite both;
 }
+
 @keyframes pulsate {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.08);
   }
+
   100% {
     transform: scale(1);
   }
@@ -170,14 +204,23 @@ transition: background-color 0.3s ease;
   box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
 }
 
-.todo-label-completed{
-   color: #9d9ea1;
+.todo-label-completed {
+  color: #18864B;
   cursor: pointer;
-  font-size: 14px;
   font-weight: 600;
-  padding: 8px 16px;
   transition: background-color 0.3s ease;
   text-decoration: line-through;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #18864B;
+}
+
+label.todo-label,
+.delete-button {
+  margin: 0;
 }
 
 .not-found-label {
@@ -199,7 +242,7 @@ transition: background-color 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
 }
 
 .popup-content {
@@ -207,7 +250,7 @@ transition: background-color 0.3s ease;
   flex-direction: column;
   align-items: center;
   width: 20%;
-  height: 30%;
+  max-height: 30%;
   background-color: #fff;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   border-radius: 10px;
@@ -219,28 +262,28 @@ transition: background-color 0.3s ease;
   justify-content: center;
   width: 30px;
   height: 30px;
-  background-color: rgb(166, 54, 58) ;
+  background-color: rgb(166, 54, 58);
   color: #fff;
   border: none;
   border-radius: 30px;
-  padding: 6px ;
+  padding: 6px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
   animation: pulsate 1.5s ease-in-out infinite both;
 }
-  
+
 
 .popup-content .button-container {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  
+
 }
 
 .popup-content textarea:focus {
-  /* outline: 1px solid rgb(212, 208, 208);  */
+
   outline: none;
 }
 
@@ -253,3 +296,18 @@ transition: background-color 0.3s ease;
   padding: 0.5rem;
   margin-bottom: 1rem;
 }
+
+
+.button-success {
+  background-color: yellowgreen !important;
+}
+.button-danger {
+  background-color: brown !important;
+}
+.todo-container {
+  display: flex;
+  align-items: center;
+  width: 100%; 
+  word-wrap: break-word;
+}
+

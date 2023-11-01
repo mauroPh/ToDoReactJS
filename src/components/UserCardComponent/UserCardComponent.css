@@ -1,0 +1,10 @@
+.sb-avatar__text{
+    border-radius: 4px;
+}
+
+.button-success {
+    background-color: yellowgreen !important;
+}
+.button-danger {
+    background-color: brown !important;
+}
