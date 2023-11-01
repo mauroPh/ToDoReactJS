@@ -4,15 +4,6 @@
     align-items: center;
     flex-direction: row;
     z-index: 3;
-    align-content: center;
-
-}
-
-body{
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #f5f5f5;
 }
 
 .header.open:after {
@@ -23,12 +14,6 @@ body{
     position: absolute;
     z-index: 3;
     top: 0;
-}
-
-.header h1 {
-    width: 100%;
-    text-align: center;
-    margin-right: 57px;
 }
 
 .menu {
@@ -45,6 +30,12 @@ body{
     display: flex;
     flex-direction: column;
     cursor: pointer;
+}
+
+.header h1 {
+    width: 100%;
+    text-align: center;
+    margin-right: 57px;
 }
 
 .line {

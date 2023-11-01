@@ -4,6 +4,7 @@ import Header from "../../components/Header/header";
 import UserCardComponent from "../../components/UserCardComponent/UserCardComponent";
 import RegisterPage from "../Register/RegisterPage";
 import { deleteUser, getAllUsers, updateUser } from "./UsersRepository";
+import "./Users.css";
 
 function UsersListPage() {
   const [users, setUsers] = useState([]);

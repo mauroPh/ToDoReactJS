@@ -1,0 +1,53 @@
+.add-user-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    align-items: center;
+  justify-content: center;
+  
+  background-color:  rgba(55, 61, 75, 0.641);
+  box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
+
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 6px ;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  }
+
+.reg-user-button{   
+ 
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    background-color:  rgba(55, 61, 75, 0.641);
+    box-shadow: 0 2px 4px rgba(212, 61, 11, 0.641);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 6px ;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .popup-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 270px;
+      background-color: rgb(255, 255, 255);
+      max-width: 500px;
+      width: 500px;
+      padding: 50px 25px;
+      position: absolute;
+      border-radius: 30px;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
+  }
