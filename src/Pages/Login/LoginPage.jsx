@@ -9,6 +9,8 @@ function Login() {
   const [usernameLabelPosition, setUsernameLabelPosition] = useState("top");
   const [passwordLabelPosition, setPasswordLabelPosition] = useState("top");
   const [redirectToToDoPage, setRedirectToToDoPage] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleUsernameChange = (event) => {
     const value = event.target.value;
@@ -24,8 +26,25 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await getUserInfo(username, password);
-    setRedirectToToDoPage(true);
+
+    
+    if (!username) {
+      setEmailError(<span style={{color: "red"}}>Preencha o campo de email</span>);
+    } else {
+      setEmailError("");
+    }
+
+    if (!password) {
+      setPasswordError(<span style={{color: "red"}}>Preencha o campo de senha</span>);
+    } else {
+      setPasswordError("");
+    }
+
+    
+    if (username && password) {
+      await getUserInfo(username, password);
+      setRedirectToToDoPage(true);
+    }
   };
 
   if (redirectToToDoPage) {
@@ -43,6 +62,7 @@ function Login() {
             value={username}
             onChange={handleUsernameChange}
           />
+          <div className="error-message">{emailError}</div>
         </label>
         <label className={`label-${passwordLabelPosition}`}>
           Senha:
@@ -51,9 +71,12 @@ function Login() {
             value={password}
             onChange={handlePasswordChange}
           />
+          <div className="error-message">{passwordError}</div>
         </label>
-          <div className='button-separator'></div>
-          <button type="submit" className="login-button">Acessar</button>
+        <div className="button-separator"></div>
+        <button type="submit" className="login-button">
+          Acessar
+        </button>
       </form>
     </div>
   );
