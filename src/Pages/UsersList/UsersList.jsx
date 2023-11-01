@@ -4,23 +4,36 @@ import Header from "../../components/Header/header";
 import UserCardComponent from "../../components/UserCardComponent/UserCardComponent";
 import RegisterPage from "../Register/RegisterPage";
 import { deleteUser, getAllUsers, updateUser } from "./UsersRepository";
-import ConfirmationPopup from "../../components/ConfirmationPopup/ConfirmationPopup";
 
 function UsersListPage() {
   const [users, setUsers] = useState([]);
-  const [reloadAdd,setReloadAdd] = useState([]);
+  const [reloadAdd, setReloadAdd] = useState([]);
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 8;
-  
-  const [isConfirmationPopupVisible, setIsConfirmationPopupVisible] = useState(false);
-  const [confirmationMessage, setConfirmationMessage] = useState("");
 
   async function fetchUsers() {
     try {
       const res = await getAllUsers();
       const users = res.result;
       setUsers(users);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async function handleDelete(id) {
+    try {
+      await deleteUser(id);
+      fetchUsers();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleUpdate(id, updatedUser) {
+    try {
+      await updateUser(id, updatedUser);
+      setReloadAdd([...users]);
     } catch (error) {
       console.error(error);
     }
@@ -45,31 +58,6 @@ function UsersListPage() {
     setCurrentPage(data.selected);
   }
 
-  async function handleUpdate(id, updatedUser) {
-    try {
-      await updateUser(id, updatedUser);
-      setReloadAdd([...users]);
-      
-      showConfirmationPopup("Email e senha atualizados com sucesso");
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  
-  const showConfirmationPopup = (message) => {
-    setConfirmationMessage(message);
-    setIsConfirmationPopupVisible(true);
-  };
-
-  async function handleDelete(id) {
-    try {
-      await deleteUser(id);
-      fetchUsers();
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   function RegisterPopup({ onClose }) {
     return (
       <div className="popup">
@@ -79,12 +67,12 @@ function UsersListPage() {
       </div>
     );
   }
-  
+
   function handleCloseRegisterPopup() {
     setShowRegisterPopup(false);
   }
 
-   return (
+  return (
     <div>
       <Header title="Gerenciar usuários" />
       <div className="App">
@@ -99,7 +87,7 @@ function UsersListPage() {
             />
           ))}
         </ul>
-        {pageCount() > 1 && ( 
+        {pageCount() > 1 && (
           <ReactPaginate
             pageCount={pageCount()}
             onPageChange={handlePageClick}
@@ -114,19 +102,6 @@ function UsersListPage() {
         </button>
         {showRegisterPopup && <RegisterPopup onClose={handleCloseRegisterPopup} />}
       </div>
-
-     
-      {isConfirmationPopupVisible && (
-        <ConfirmationPopup
-          question={confirmationMessage}
-          onConfirm={() => {
-            setIsConfirmationPopupVisible(false);
-          }}
-          onCancel={() => {
-            setIsConfirmationPopupVisible(false);
-          }}
-        />
-      )}
     </div>
   );
 }

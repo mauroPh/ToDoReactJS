@@ -1,10 +1,9 @@
-import Icon from '@mdi/react';
 import React, { useState } from "react";
-import { deleteTodo } from "../../Pages/ToDo/ToDoRepository";
-import "./ToDoItemComponent.css"
-import {mdiClose,mdiChevronRight, mdiContentSave, mdiFileEditOutline, mdiTrashCanOutline,  } from '@mdi/js';
+import { mdiClose, mdiChevronRight, mdiContentSave, mdiFileEditOutline, mdiTrashCanOutline } from '@mdi/js';
+import Icon from '@mdi/react';
+import "./ToDoItemComponent.css";
 import styled from "styled-components";
-
+import ConfirmationPopup from "../../components/ConfirmationPopup/ConfirmationPopup";
 
 const ToDoLabel = styled.label`
   cursor: pointer;
@@ -17,6 +16,7 @@ const ToDoArrow = styled(Icon)`
   cursor: pointer;
   display: ${props => props.completed ? "none" : "block"};
 `;
+
 const ToDoDetails = styled.div`
   padding: 20px;
   border-radius: 10px;
@@ -27,24 +27,20 @@ const ToDoDetailsText = styled.p`
   margin: 0;
 `;
 
-
 function ToDoItemComponent(props) {
-  console.log("ToDoItemComponent props:", props);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedTodoText, setUpdatedTodoText] = useState(props.todo.description);
   const [showDetails, setShowDetails] = useState(false);
+  const [isDeleteConfirmationVisible, setIsDeleteConfirmationVisible] = useState(false);
+  const [isUpdateConfirmationVisible, setIsUpdateConfirmationVisible] = useState(false);
 
   const handleArrowClick = () => {
     setShowDetails(!showDetails);
   };
 
   function handleUpdate() {
-    const updatedTodo = { ...props.todo, description: updatedTodoText };
-    props.handleUpdate(props.todo.todoId, updatedTodo);
-    setIsEditing(false);
+    setIsUpdateConfirmationVisible(true);
   }
-  
-
 
   function handleCancel() {
     setIsEditing(false);
@@ -52,14 +48,25 @@ function ToDoItemComponent(props) {
     setShowDetails(false);
   }
 
-  const handleDelete = async () => {
-    try {
-      await deleteTodo(props.todo.todoId);
-      props.fetchTodos();
-    } catch (error) {
-      console.error(error);
+  const handleDelete = () => {
+    setIsDeleteConfirmationVisible(true);
+  };
+
+  const handleDeleteConfirmation = (confirmed) => {
+    setIsDeleteConfirmationVisible(false);
+    if (confirmed) {
+      props.handleDelete(props.todo.todoId);
     }
   };
+
+  const handleUpdateConfirmation = (confirmed) => {
+    setIsUpdateConfirmationVisible(false);
+    if (confirmed) {
+      const updatedTodo = { ...props.todo, description: updatedTodoText };
+      props.handleUpdate(props.todo.todoId, updatedTodo);
+      setIsEditing(false);
+    }
+  }
 
   const handleDescriptionClick = () => {
     setIsEditing(true);
@@ -72,50 +79,53 @@ function ToDoItemComponent(props) {
     }
   };
 
-  
-
   return (
     <div className={props.todo.completed ? "card-wrapper todo-item-completed" : "card-wrapper"}>
       {isEditing ? (
         <div className="popup">
-        <div className="popup-content">
-          <textarea
-            value={updatedTodoText}
-            onChange={(event) => setUpdatedTodoText(event.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-          <div className="button-container">
-            <button className="popup-content button" onClick={handleUpdate}><Icon path={mdiContentSave} size={1} /></button>
-            <button className="popup-content button" onClick={handleCancel}><Icon path={mdiClose} size={1} /></button>
+          <div className="popup-content">
+            <textarea
+              value={updatedTodoText}
+              onChange={(event) => setUpdatedTodoText(event.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <div className="button-container">
+              <button className="popup-content button" onClick={() => handleUpdate()}>
+                <Icon path={mdiContentSave} size={1} />
+              </button>
+              <button className="popup-content button" onClick={handleCancel}>
+                <Icon path={mdiClose} size={1} />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       ) : (
         <>
           <input
             type="checkbox"
             checked={props.todo.completed}
-            onChange={() => props.handleCheckboxChange(props.todo.todoId, !props.todo.complete)}
+            onChange={() => props.handleCheckboxChange(props.todo.todoId, !props.todo.completed)}
           />
           <ToDoLabel completed={props.todo.completed}>
-             <ToDoArrow completed={props.todo.completed} path={mdiChevronRight} size={0.8} onClick={handleArrowClick}/>
-            <span className="todo-item-description" >{props.todo.description}</span>
-           </ToDoLabel>
-            {showDetails && (
-              <div className="popup">
-                <div className="popup-content">
-                  <ToDoDetails>
-                    <ToDoDetailsText>Concluída: {props.todo.completed ? "Sim" : "Não"}</ToDoDetailsText>
-                    <ToDoDetailsText>Data de criação:{new Date(props.todo.createdOn).toLocaleString()}</ToDoDetailsText>
-                    <ToDoDetailsText>Última modificação: {new Date(props.todo.modifiedOn).toLocaleString()}</ToDoDetailsText>
-                    <ToDoDetailsText>Tarefa criada por: {props.todo.createdBy}</ToDoDetailsText>
-                    <ToDoDetailsText>Modificada por: {props.todo.modifiedBy}</ToDoDetailsText>
-                    
-                  </ToDoDetails>
-                  <button className="popup-content button" onClick={handleCancel}><Icon path={mdiClose} size={1} /></button>
-                </div>
+            <ToDoArrow completed={props.todo.completed} path={mdiChevronRight} size={0.8} onClick={handleArrowClick} />
+            <span className="todo-item-description">{props.todo.description}</span>
+          </ToDoLabel>
+          {showDetails && (
+            <div className="popup">
+              <div className="popup-content">
+                <ToDoDetails>
+                  <ToDoDetailsText>Concluída: {props.todo.completed ? "Sim" : "Não"}</ToDoDetailsText>
+                  <ToDoDetailsText>Data de criação: {new Date(props.todo.createdOn).toLocaleString()}</ToDoDetailsText>
+                  <ToDoDetailsText>Última modificação: {new Date(props.todo.modifiedOn).toLocaleString()}</ToDoDetailsText>
+                  <ToDoDetailsText>Tarefa criada por: {props.todo.createdBy}</ToDoDetailsText>
+                  <ToDoDetailsText>Modificada por: {props.todo.modifiedBy}</ToDoDetailsText>
+                </ToDoDetails>
+                <button className="popup-content button" onClick={handleCancel}>
+                  <Icon path={mdiClose} size={1} />
+                </button>
               </div>
-            )}
+            </div>
+          )}
 
           <div className="delete-button-container">
             {!props.todo.completed && (
@@ -128,6 +138,22 @@ function ToDoItemComponent(props) {
             </button>
           </div>
         </>
+      )}
+
+      {isDeleteConfirmationVisible && (
+        <ConfirmationPopup
+          question="Deseja realmente excluir esta tarefa?"
+          onConfirm={(confirmed) => handleDeleteConfirmation(confirmed)}
+          onCancel={() => setIsDeleteConfirmationVisible(false)}
+        />
+      )}
+
+      {isUpdateConfirmationVisible && (
+        <ConfirmationPopup
+          question="Deseja realmente editar esta tarefa?"
+          onConfirm={(confirmed) => handleUpdateConfirmation(confirmed)}
+          onCancel={() => setIsUpdateConfirmationVisible(false)}
+        />
       )}
     </div>
   );
