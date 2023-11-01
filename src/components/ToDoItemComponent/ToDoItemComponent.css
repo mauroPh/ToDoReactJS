@@ -222,7 +222,6 @@ transition: background-color 0.3s ease;
 }
 
 .popup-content textarea:focus {
-  /* outline: 1px solid rgb(212, 208, 208);  */
   outline: none;
 }
 

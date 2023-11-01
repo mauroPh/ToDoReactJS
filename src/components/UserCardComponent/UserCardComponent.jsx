@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { mdiClose, mdiContentSave, mdiTrashCanOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import Avatar from 'react-avatar';
-import ConfirmationPopup from "../../components/ConfirmationPopup/ConfirmationPopup"; // Importe o ConfirmationPopup
+import ConfirmationPopup from "../../components/ConfirmationPopup/ConfirmationPopup";
 
 function UserCardComponent(props) {
   const [isEditing, setIsEditing] = useState(false);
