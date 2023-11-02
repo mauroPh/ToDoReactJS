@@ -16,6 +16,7 @@ function ToDoPage() {
     try {
       const res = await getAllTodos();
       const todos = res.result.content;
+      console.log(todos);
       setTodos(todos);
     } catch (error) {
       console.error(error);
@@ -81,7 +82,7 @@ function ToDoPage() {
         <ul className="todo-list">
           {currentItems().map((todo) => (
             <ToDoItemComponent
-              key={todo.id}
+              key={todo.todoId}
               todo={todo}
               handleCheckboxChange={handleCheckboxChange}
               handleDelete={handleDelete}

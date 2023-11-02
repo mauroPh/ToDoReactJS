@@ -22,6 +22,7 @@ function UsersPage() {
       const res = await getAllUsers();
       const users = res.result;
       setUsers(users);
+      console.log("users",users);
     } catch (error) {
       console.error(error);
     }
@@ -98,7 +99,7 @@ function UsersPage() {
         <ul className="todo-list">
           {currentItems().map((user) => (
             <UserCardComponent
-              key={user.id}
+              key={user.userId}
               user={user}
               handleDelete={handleDeleteUser}
               handleUpdate={handleUpdate}

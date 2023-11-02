@@ -15,7 +15,7 @@ const ToDoItem = styled.div`
   margin-bottom: 10px;
   padding: 15px;
   border-radius: 5px;
-  background-color: ${props => props.completed ? "#e6e6e6" : "#fff"};
+  background-color: ${props => props.$completed ? "#e6e6e6" : "#fff"};
   box-shadow: 0 1px 1px rgba(3, 73, 251, 0.641);
 `;
 
@@ -51,7 +51,7 @@ const ToDoLabel = styled.div`
   align-self: center;
   margin-right: 10px;
   cursor: pointer;
-  text-decoration: ${(props) => (props.completed ? "line-through" : "none")};
+  text-decoration: ${(props) => (props.$completed ? "line-through" : "none")};
   white-space: nowrap;  
   overflow: hidden;
   `;
@@ -182,7 +182,7 @@ function ToDoItemComponent(props) {
   };
 
   return (
-    <ToDoItem completed={props.todo.completed}>
+    <ToDoItem $completed={props.todo.completed}>
         <>
         <ToDoCheckbox
             type="checkbox"
@@ -192,7 +192,7 @@ function ToDoItemComponent(props) {
 
           <ToDoLabelWrapper>
         <Column>
-            <ToDoLabel completed={props.todo.completed}>
+            <ToDoLabel $completed={props.todo.completed}>
               <DescriptionContainer onClick={handleDescriptionClick}>
               {props.todo.description}
             </DescriptionContainer>
