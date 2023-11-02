@@ -22,23 +22,6 @@ border-radius: 30px;
 border: none;
 `;
 
-const Input = styled.input`
-white-space: pre-wrap;
-outline: none;
-box-shadow: none;
-background-color: rgba(255, 255, 255, 0.9);
-width: 100%;
-height: 80%;
-padding: 10px;
-margin-bottom: 10px;
-border: none;
-border-radius: 5px;
-
-&:focus {
-  outline: none;
-  box-shadow: none;}
-`;
-
 const CloseButton = styled.button`
 position: fixed;
 top: 20px;
@@ -58,7 +41,6 @@ border: none;
 &:hover  
   background-color: #8a0c0c;
 `;
-
 
 const Textarea = styled.textarea`
   white-space: pre-wrap;

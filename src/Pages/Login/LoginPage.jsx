@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import iconToDo from '../../assets/lista-de-afazeres.png';
+import { UserContext } from "../../services/UserContext";
 import '../../styles/style.sass';
 import { getUserInfo } from "./LoginRepository";
 
@@ -10,6 +11,9 @@ function Login() {
   const [usernameLabelPosition, setUsernameLabelPosition] = useState("top");
   const [passwordLabelPosition, setPasswordLabelPosition] = useState("top");
   const [redirectToToDoPage, setRedirectToToDoPage] = useState(false);
+  const navigate = useNavigate();
+
+  const { setUser } = useContext(UserContext);
 
   const handleUsernameChange = (event) => {
     const value = event.target.value;
@@ -25,13 +29,16 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await getUserInfo(username, password);
+    const userInfo = await getUserInfo(username, password);
+    setUser(userInfo);
     setRedirectToToDoPage(true);
   };
 
-  if (redirectToToDoPage) {
-    return <Navigate to="/todos" />;
-  }
+  useEffect(() => {
+    if (redirectToToDoPage) {
+      navigate("/todos");
+    }
+  }, [redirectToToDoPage, navigate]);
 
   return (
     <div className="login-container">

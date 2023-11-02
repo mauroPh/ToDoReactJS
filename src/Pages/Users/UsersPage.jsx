@@ -8,6 +8,7 @@ import UserCardComponent from "../../styles/styledComponents/UserCardComponent";
 import RegisterPage from "../Register/RegisterPage";
 import { deleteUser, getAllUsers, updateUser } from "./UsersRepository";
 
+
 function UsersPage() {
   const [users, setUsers] = useState([]);
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);

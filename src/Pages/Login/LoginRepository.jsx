@@ -1,22 +1,30 @@
 import api from '../../services/api';
 
-async function getUserInfo(email, password) {
+export async function getUserInfo(email, password) {
   try {
     const response = await api.post('/token/generate-token', {
-      email: email,
-      password: password
+      email,
+      password,
     });
-    console.log("getUserInfo ", response.data);
-    localStorage.setItem('token', response.data.result.token);
-    localStorage.setItem('email', response.data.result.username);
-    return response.data.result.token;
+
+    if (response.data && response.data.result) {
+      const { token, username } = response.data.result;
+      console.log('response login : ',response.data.result );
+      localStorage.setItem('userId', response.data.result.userId);
+      localStorage.setItem('profileId', response.data.result.profile.profileId);
+      localStorage.setItem('token', token);
+      localStorage.setItem('email', response.data.result.email);
+      return { email: username, token };
+    }
   } catch (error) {
-    console.error(error);
+    console.error('Error fetching user info:', error);
   }
+
+  return null;
 }
 
-
-export {
-  getUserInfo
-};
+export async function logout() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('email');
+}
 

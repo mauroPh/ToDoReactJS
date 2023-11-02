@@ -7,7 +7,6 @@ import CenterModal from './CenterModal';
 import ConfirmationPopup from "./ConfirmationPopup";
 import EditingTodoComponent from "./EditingTodoComponent";
 
-
 const ToDoItem = styled.div`
  position: relative;
   display: flex;
@@ -18,7 +17,6 @@ const ToDoItem = styled.div`
   border-radius: 5px;
   background-color: ${props => props.completed ? "#e6e6e6" : "#fff"};
   box-shadow: 0 1px 1px rgba(3, 73, 251, 0.641);
-
 `;
 
 const ToDoCheckbox = styled.input`
@@ -31,7 +29,8 @@ cursor: pointer;
 const ToDoLabelWrapper = styled.div`
 display: flex;
 flex-grow: 1;
-align-items: center;`;
+align-items: center;
+`;
 
 const Column = styled.div`
   display: flex;
@@ -76,7 +75,6 @@ const ToDoDetails = styled.div`
   align-self: flex-start;
   padding-left: 10px;
   padding-right: 10px;
-
 `;
 
 const ToDoDetailsText = styled.p`
@@ -102,8 +100,7 @@ const ToDoDeleteButton = styled.button`
   border: none;
   cursor: pointer;
   color: #ff0000;
-
-align-self: flex-start;
+  align-self: flex-start;
 
 &:hover {   color: #ff0000;
   background-color: #f2f2f2;
@@ -111,19 +108,21 @@ align-self: flex-start;
   cursor: pointer;
 }
 `;
+
 const ToDoArrow = styled(Icon)`
-position: absolute;
-top: 15px;
-right: 100px;
+  position: absolute;
+  top: 15px;
+  right: 100px;
   margin-right: 2px;
   align-self: flex-start;
   cursor: pointer;
 `;
+
 const ShowMoreText = styled.span`
-position: absolute;
-top: 20px;
-right: 50px;
-font-size: 0.6em;
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  font-size: 0.6em;
   color: blue;
   padding-right: 5px;
   cursor: pointer;
@@ -134,7 +133,6 @@ function ToDoItemComponent(props) {
   const [isDeleteConfirmation, setIsDeleteConfirmation] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
 
   const handleDelete = async () => {
     setIsDeleteConfirmation(true);
@@ -191,8 +189,8 @@ function ToDoItemComponent(props) {
             checked={props.todo.completed}
             onChange={handleCheckboxChange}
           />
+
           <ToDoLabelWrapper>
-         
         <Column>
             <ToDoLabel completed={props.todo.completed}>
               <DescriptionContainer onClick={handleDescriptionClick}>
@@ -204,30 +202,31 @@ function ToDoItemComponent(props) {
         <CenterModal onClose={handleCloseModal}>
           <EditingTodoComponent todo={props.todo} closePopup={handleCloseModal} fetchTodos={props.fetchTodos} />    
         </CenterModal>)}
-        {showDetails && (
-  <>
-    <ToDoDetails>
-      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Concluída ? {props.todo.completed ? "Sim." : "Não."}</ToDoDetailsText></Row>
-      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Criada em: {new Date(props.todo.createdOn).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}</ToDoDetailsText></Row>
-      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Última modificação: {new Date(props.todo.modifiedOn).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}</ToDoDetailsText></Row>      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Criada por: {props.todo.createdBy}</ToDoDetailsText></Row>
-      <Row><ToDoMarker>&#8226;</ToDoMarker>  <ToDoDetailsText>Modificada por: {props.todo.modifiedBy}</ToDoDetailsText></Row>
-    </ToDoDetails>
-  </>
-)}
-        </Column>
-          </ToDoLabelWrapper>
-          <div style={{ display: 'flex',alignItems:'stretch'} } onClick={handleArrowClick}>
-         <Row>
-         <ToDoArrow
+      {showDetails && (
+      <>
+        <ToDoDetails>
+          <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Concluída ? {props.todo.completed ? "Sim." : "Não."}</ToDoDetailsText></Row>
+          <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Criada em: {new Date(props.todo.createdOn).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}</ToDoDetailsText></Row>
+          <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Última modificação: {new Date(props.todo.modifiedOn).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}</ToDoDetailsText></Row>      <Row><ToDoMarker>&#8226;</ToDoMarker> <ToDoDetailsText>Criada por: {props.todo.createdBy}</ToDoDetailsText></Row>
+          <Row><ToDoMarker>&#8226;</ToDoMarker>  <ToDoDetailsText>Modificada por: {props.todo.modifiedBy}</ToDoDetailsText></Row>
+        </ToDoDetails>
+      </>
+      )}
+      </Column>
+        </ToDoLabelWrapper>
+      <div style={{ display: 'flex',alignItems:'stretch'} } onClick={handleArrowClick}>
+        <Row>
+        <ToDoArrow
             path={showDetails ? mdiChevronDown : mdiChevronLeft}
             size={0.8}/>
-          <ShowMoreText>{showDetails ? 'Ocultar' : 'Detalhes'}</ShowMoreText>
-         </Row>
-         
+        <ShowMoreText>{showDetails ? 'Ocultar' : 'Detalhes'}</ShowMoreText>
+        </Row> 
         </div>
-          <ToDoDeleteButton onClick={handleDelete}>
+        
+        <ToDoDeleteButton onClick={handleDelete}>
             <Icon path={mdiClose} size={0.8} />
-          </ToDoDeleteButton>
+        </ToDoDeleteButton>
+        
         </>
       {showPopup && (
         <ConfirmationPopup
@@ -237,9 +236,7 @@ function ToDoItemComponent(props) {
         />
       )}
     </ToDoItem>
-
   );
       }
-
 
 export default ToDoItemComponent;

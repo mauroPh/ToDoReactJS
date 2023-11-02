@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { UserContext } from '../../services/UserContext';
 import { logout } from "../../services/auth";
 import '../../styles/style.sass';
+import { PopupAlert } from '../../styles/styledComponents/Popups';
 
 const Header = ({ title, userEmail }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const user = {
-    email: localStorage.getItem('email') || "usuario@gmail.com",
-  };
+  const [showPopup, setShowPopup] = useState(false);
+  const userContext = useContext(UserContext); // Use UserContext
   const history = useNavigate();
 
   function handleLandPage() {
@@ -22,10 +23,24 @@ const Header = ({ title, userEmail }) => {
   }
 
   function handleUsersListPage() {
+    console.log("header : ", localStorage)
     setMenuOpen(false);
-    history('/users');
-    window.location.reload();
+    if (localStorage.profileId !== 'ae576a80-ddb8-44f5-88f0-635ee39d559d') {
+      setShowPopup(true);
+    } else {
+      history('/users');
+      window.location.reload();
+    }
   }
+
+  useEffect(() => {
+    if (showPopup) {
+      const timer = setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showPopup]);
 
   return (
     <div className={isMenuOpen ? 'header open' : 'header'}>
@@ -38,13 +53,18 @@ const Header = ({ title, userEmail }) => {
       </div>
       {isMenuOpen && (
         <div className="user-info">
-          <p>{user.email}</p>
+          <p>{localStorage.email}</p>
           <button className="menu-button" onClick={handleLandPage}>ToDo's</button>
           <div className='button-separator'></div>
           <button className="menu-button" onClick={handleUsersListPage}>Usuários</button>
           <div className='button-separator'></div>
           <button className="exit-button" onClick={handleLogout}>Sair</button>
         </div>
+      )}
+      {showPopup && (
+       <PopupAlert>
+         <h5>Oops! Você não tem permissão.</h5>
+       </PopupAlert>
       )}
       <h1 className="title">{title}</h1>
     </div>

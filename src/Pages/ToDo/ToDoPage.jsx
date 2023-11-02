@@ -10,7 +10,7 @@ function ToDoPage() {
   const [todos, setTodos] = useState([]);
   const [reloadAdd, setReloadAdd] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   async function fetchTodos() {
     try {

@@ -29,13 +29,13 @@ cursor: pointer;
 
 const DeleteButton = styled.button`
   align-self: flex-start;
+  margin-top: 12px;
   margin-left: 10px;
   background-color: transparent;
   border: none;
   cursor: pointer;
   color: #ff0000;
-
-align-self: flex-start;
+  align-self: flex-start;
 
 &:hover {   color: #ff0000;
   background-color: #f2f2f2;
@@ -45,22 +45,15 @@ align-self: flex-start;
 `;
 
 function UserCardComponent(props,fetchUsers,user) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [updatedText, setUpdatedText] = useState(props.user.email);
   const [showPopup, setShowPopup] = useState(false);
   const [isDeleteConfirmation, setIsDeleteConfirmation] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCenterModalOpen, setIsCenterModalOpen] = useState(false);
-
-
-
 
     const handleDelete = async () => {
     setIsDeleteConfirmation(true);
     setShowPopup(true);
   };
 
- 
   const handleConfirmPopup = async () => {
     if (isDeleteConfirmation) {
       try {
@@ -76,8 +69,6 @@ function UserCardComponent(props,fetchUsers,user) {
   const handleClosePopup = () => {
     setShowPopup(false);
   };
-
-
 
   const handleOpenCenterModal = () => {
     setIsCenterModalOpen(true);
@@ -99,7 +90,7 @@ function UserCardComponent(props,fetchUsers,user) {
           {isCenterModalOpen && (
             <CenterModal><RegisterPage closePopup={handleCloseCenterModal} fetchUsers={props.fetchUsers}user={props.user} /></CenterModal>
           )}
-       {showPopup && (
+      {showPopup && (
         <ConfirmationPopup
           question={"Tem certeza que deseja excluir?"}
           onConfirm={handleConfirmPopup}
@@ -108,7 +99,6 @@ function UserCardComponent(props,fetchUsers,user) {
       )}
     </UserCard>
   );
-  
 }
 
 export default UserCardComponent;
