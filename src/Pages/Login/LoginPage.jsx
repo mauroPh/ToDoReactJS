@@ -61,15 +61,12 @@ function Login() {
             onChange={handlePasswordChange}
           />
         </label>
-        <p className="text-display-medium">
-          Esqueceu seu email ou sua senha?
-          <a href="cadastro.html">Clique aqui</a>
-        </p>
-
           <div className='button-separator'></div>
           <button type="submit" className="login-button">Acessar</button>
        
         <img src={iconToDo} alt="Minha Imagem" className='imagem-fixa'/>
+        <div className='button-separator'></div>
+
       </form>
     </div>
   );

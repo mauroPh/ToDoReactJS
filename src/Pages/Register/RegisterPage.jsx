@@ -70,7 +70,11 @@ function RegisterPage({ closePopup, fetchUsers, user }) {
             <option value="user">Usuário</option>
           </select>
         </label>
+        <div className='button-separator'></div>
+
         <button type="submit" className="login-button">{user ? "Salvar" : "Adicionar"}</button>
+        <div className='button-separator'></div>
+
       </form>
     </div>
   );

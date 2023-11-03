@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
+import Avatar from 'react-avatar';
 import { useNavigate } from "react-router-dom";
 import { UserContext } from '../../services/UserContext';
 import { logout } from "../../services/auth";
 import '../../styles/style.sass';
 import { PopupAlert } from '../../styles/styledComponents/Popups';
+
 
 const Header = ({ title, userEmail }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -45,14 +47,17 @@ const Header = ({ title, userEmail }) => {
   return (
     <div className={isMenuOpen ? 'header open' : 'header'}>
       <div className="menu">
-        <div className="hamburger" onClick={() => setMenuOpen(!isMenuOpen)}>
+      <div className={`hamburger ${isMenuOpen ? "close" : ""}`} onClick={() => setMenuOpen(!isMenuOpen)}>
           <div className={isMenuOpen ? "line line-1" : "line"}></div>
           <div className={isMenuOpen ? "line line-2" : "line"}></div>
-          <div className={isMenuOpen ? "line line-3" : "line"}></div>
-        </div>
+           <div className={isMenuOpen ? "line line-3" : "line"}></div>
+    </div>
       </div>
       {isMenuOpen && (
         <div className="user-info">
+          <h1 className="title">To-do App</h1>
+
+          <Avatar name={localStorage.email} size="3vw" round={true} />
           <p>{localStorage.email}</p>
           <button className="menu-button" onClick={handleLandPage}>ToDo's</button>
           <div className='button-separator'></div>

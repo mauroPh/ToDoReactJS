@@ -11,11 +11,12 @@ const ToDoItem = styled.div`
  position: relative;
   display: flex;
   justify-content: space-between;
+  color: ${props => props.$completed ? "#818181" : "#000"};
   align-items: space-evenly;
   margin-bottom: 10px;
   padding: 15px;
   border-radius: 5px;
-  background-color: ${props => props.$completed ? "#99B0C7" : "#fff"};
+  background-color: ${props => props.$completed ? "#484848" : "#fff"};
   box-shadow: 0 1px 1px rgba(3, 73, 251, 0.641);
 `;
 
@@ -123,7 +124,7 @@ const ShowMoreText = styled.span`
   top: 20px;
   right: 50px;
   font-size: 0.6em;
-  color: blue;
+  color: #7D7DFF;
   padding-right: 5px;
   cursor: pointer;
 `;

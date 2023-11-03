@@ -1,7 +1,23 @@
+
+// Estilos globais
+body  
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #E4E2E2;
+ 
+.title
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  text-align: center;
+    
 .add-todo-form
   width: 100%;
+  height: 8%;
   padding: 16px;
-  background-color: rgb(236, 235, 235);
+  background: linear-gradient(to top,#ac000d,#d10011 ,#e60012);
+  box-shadow: 0 2px 20px #484848;
   position: fixed;
   bottom: 0;
   display: flex;
@@ -15,12 +31,11 @@
     padding: 8px 16px;
     width: 80%;
     height: 40px;
-    box-shadow: 0 0 0 0 rgba(16, 113, 117, 0.4);
     transition: box-shadow 0.3s ease;
 
     &:focus,
     &:valid
-      box-shadow: 0 0 0px 0 rgba(16, 113, 117, 0.4);
+    box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);;
      
   
 .todo-list
@@ -30,6 +45,7 @@
 
 // Estilos para .header
 .header  
+  background-color: #fff;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -51,23 +67,15 @@
     width: 100%;
     text-align: center;
     margin-right: 57px;
-   
- 
-
-// Estilos globais
-body  
-  margin: 0;
-  padding: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: #f5f5f5;
- 
+  
 
 // Estilos para .menu
 .menu  
   position: relative;
   cursor: pointer;
   margin: 24px;
-  background-color: #eee !important;
+  background-color: rgba(230, 0, 10, 1);
+  box-shadow: 0 2px 4px  rgba(3, 73, 251, 0.641);
   padding: 8px;
   border-radius: 6px;
   z-index: 4;
@@ -82,7 +90,7 @@ body
   .line  
     width: 25px;
     height: 3px;
-    background-color: #c2c2c2;
+    background-color: #fff;
     margin: 3px 0;
     transition: all 0.3s ease;
 
@@ -103,12 +111,16 @@ body
 // Estilos para .user-info
 .user-info  
   font-size: clamp(12px, 2vw, 1rem);
-  width-min: 10%;
+  width: 15vw;
+  height: 90%;
+  width-min: 10vw;
   height-min: 30%
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center
+  justify-content: flex-start;
+  align-self: flex-start;
+  text-align: center;
   margin: 20px;
   position: absolute;
   top: 0;
@@ -281,7 +293,7 @@ select
   position: absolute;
   bottom: 95px;
   right: 45px;
-  background-color: #c4ffb4;
+  background-color: #2fa73c;
   font-size: clamp(12px, 0.8vw, 1rem);
   border-radius: 12px;
   padding: 10px;
@@ -339,7 +351,6 @@ select
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
-
 .pagination
   display: flex;
   justify-content: center;
@@ -359,19 +370,21 @@ select
 
     a
       padding: 5px 10px;
-      border: 1px solid #ccc;
       border-radius: 5px;
       color: #fff;
       background-color : #484848;
+      box-shadow: 0 2px 4px #484848;
 
       &.active
         background-color:  rgba(230, 0, 10, 1);
-      
+        box-shadow: 0 2px 20px #484848;
+
       &:hover
-        bakckground-color:  rgba(230, 0, 10, 1);
+        color:  rgba(230, 0, 10, 1);
+        box-shadow: 0 2px 20px #484848;
 
   &.with-add-todo-form
-      bottom: 85px;
+    bottom: 12%
 
 .select-profile
   background-color: #EBEAEA;
