@@ -94,7 +94,7 @@ font-size: smaller;
     margin: 0 0.2rem;
     padding: 0.2rem;
     color: rgba(230, 0, 10);
-    box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641);
+    box-shadow: 0 0px 0px 2px rgb(230 0 10 / 46%);
 
     background-color: transparent;
     border: none;

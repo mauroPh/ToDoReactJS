@@ -11,9 +11,8 @@ function ToDoPage() {
    const [reloadAdd, setReloadAdd] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 6;
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false); // Estado para controlar o aviso de tarefa adicionada com sucesso
-  const [showEmptyAlert, setShowEmptyAlert] = useState(false); // Estado para controlar o aviso de mensagem vazia
-
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showEmptyAlert, setShowEmptyAlert] = useState(false); 
 
   async function fetchTodos() {
     try {

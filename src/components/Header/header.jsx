@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext} from 'react';
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/auth";
 import './header.css';
+import { UserContext } from '../../services/UserContext';
 
 const Header = ({ title, userEmail }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const user = {
-    email: localStorage.getItem('email'),
-  };
+  const userContext = useContext(UserContext); 
   const history = useNavigate();
 
   function handleLandPage() {
@@ -22,9 +21,14 @@ const Header = ({ title, userEmail }) => {
   }
 
   function handleUsersListPage() {
+    console.log("header : ", localStorage)
     setMenuOpen(false);
-    history('/users');
-    window.location.reload();
+    if (localStorage.profile === '684fd078-c7ba-4204-a133-1546f61ebda9') {
+   alert("Você não tem permissão para acessar essa página")
+    } else {
+      history('/users');
+      window.location.reload();
+    }
   }
 
   return (
@@ -38,7 +42,7 @@ const Header = ({ title, userEmail }) => {
       </div>
       {isMenuOpen && (
         <div className="user-info">
-          <p>{user.email}</p>
+          <p>{localStorage.email}</p>
           <button className="login-button" onClick={handleLandPage}>ToDo's</button>
           <button className="login-button" onClick={handleUsersListPage}>Usuários</button>
           <button className="register-button" onClick={handleLogout}>Sair</button>
