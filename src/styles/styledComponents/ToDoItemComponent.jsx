@@ -15,7 +15,7 @@ const ToDoItem = styled.div`
   margin-bottom: 10px;
   padding: 15px;
   border-radius: 5px;
-  background-color: ${props => props.$completed ? "#e6e6e6" : "#fff"};
+  background-color: ${props => props.$completed ? "#99B0C7" : "#fff"};
   box-shadow: 0 1px 1px rgba(3, 73, 251, 0.641);
 `;
 
