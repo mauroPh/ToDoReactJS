@@ -67,12 +67,12 @@ const ToDoLabel = styled.div`
 
 const ToDoDetails = styled.div`
   position:relative;
-  left: 85%;
+  left: 50%;
   transform: translate(-50%);
   border-radius: 5px;
   background-color: transparent;
   white-space: nowrap;
-  align-self: flex-start;
+  align-self: center;
   padding-left: 10px;
   padding-right: 10px;
 `;
@@ -82,7 +82,7 @@ const ToDoDetailsText = styled.p`
   padding-right: 5px;
   padding-bottom: 2px;
   margin: 0;
-  font-size: clamp(12px, 2vw, 1rem);
+  font-size: clamp(10px, 1vw, 1rem);
 `;
 
 const ToDoMarker = styled.div`
