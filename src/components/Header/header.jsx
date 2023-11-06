@@ -1,3 +1,5 @@
+import { mdiAccount, mdiCheckOutline, mdiExitToApp } from '@mdi/js';
+import Icon from '@mdi/react';
 import React, { useContext, useEffect, useState } from 'react';
 import Avatar from 'react-avatar';
 import { useNavigate } from "react-router-dom";
@@ -5,7 +7,6 @@ import { UserContext } from '../../services/UserContext';
 import { logout } from "../../services/auth";
 import '../../styles/style.sass';
 import { PopupAlert } from '../../styles/styledComponents/Popups';
-
 
 const Header = ({ title, userEmail }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -54,21 +55,32 @@ const Header = ({ title, userEmail }) => {
     </div>
       </div>
       {isMenuOpen && (
-        <div className="user-info">
-          <h1 className="title">To-do App</h1>
-
-          <Avatar name={localStorage.email} size="3vw" round={true} />
-          <p>{localStorage.email}</p>
-          <button className="menu-button" onClick={handleLandPage}>ToDo's</button>
+        <div className="menu-opened">
+          <h1 className="menu-title">To-do App</h1>
           <div className='button-separator'></div>
-          <button className="menu-button" onClick={handleUsersListPage}>Usuários</button>
-          <div className='button-separator'></div>
-          <button className="exit-button" onClick={handleLogout}>Sair</button>
+          <div className='menu-user-logged'>
+          <Avatar name={localStorage.email} size="2vw" round={true} />
+          <p className='menu-email-user'>{localStorage.email}</p>
+          </div>
+          
+          <div className='menu-item' onClick={handleLandPage}>
+            <Icon path={mdiCheckOutline} size={1} />
+            <button className="menu-button">ToDo's</button>
+          </div>
+          <div className='menu-item' onClick={handleUsersListPage}>
+            <Icon path={mdiAccount} size={1} />
+            <button className="menu-button">Usuários</button>
+          </div>
+          <div className='menu-item' onClick={handleLogout}>
+            <Icon path={mdiExitToApp} size={1} />
+            <button className="exit-button">Sair</button>
+          </div>
+          
         </div>
       )}
       {showPopup && (
        <PopupAlert>
-         <h5>Oops! Você não tem permissão.</h5>
+         <h3>Oops! Você não tem permissão.</h3>
        </PopupAlert>
       )}
       <h1 className="title">{title}</h1>

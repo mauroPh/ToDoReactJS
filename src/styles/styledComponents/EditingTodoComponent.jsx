@@ -9,7 +9,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: space-evenly;
-height: 80%;
+height: 100%;
 background-color: rgba(255, 255, 255, 0.9);
 max-width: 500px;
 width: 450px;

@@ -1,6 +1,9 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
 import AppRoutes from './routes/routes';
 import { UserContext } from './services/UserContext';
+
+
 const App = () => {
   const [user, setUser] = useState(null);
 
