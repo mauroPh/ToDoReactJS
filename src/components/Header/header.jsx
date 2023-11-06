@@ -2,11 +2,9 @@ import React, { useState, useContext} from 'react';
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/auth";
 import './header.css';
-import { UserContext } from '../../services/UserContext';
 
 const Header = ({ title, userEmail }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const userContext = useContext(UserContext); 
   const history = useNavigate();
 
   function handleLandPage() {
@@ -15,8 +13,8 @@ const Header = ({ title, userEmail }) => {
     window.location.reload();
   }
 
-  function handleLogout() {
-    logout();
+  async function handleLogout() {
+    await logout();
     handleLandPage();
   }
 

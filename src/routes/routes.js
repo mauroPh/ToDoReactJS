@@ -11,9 +11,9 @@ const AppRoutes = () => (
     <Routes>
       <Route path="/" element={<LoginPage />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/users" element={isAuthenticated() && getProfileId() === 'ae576a80-ddb8-44f5-88f0-635ee39d559d' ? <UsersPage /> : <Navigate to="/" />} />
-      <Route path="/register" element={isAuthenticated() && getProfileId() === 'ae576a80-ddb8-44f5-88f0-635ee39d559d' ? <RegisterPage /> : <Navigate to="/" />} />
-      <Route path="/todos" element={isAuthenticated() ? <ToDoPage /> : <Navigate to="/" />} />
+      <Route path="/users" element={isAuthenticated && getProfileId() === 'ae576a80-ddb8-44f5-88f0-635ee39d559d' ? <UsersPage /> : <Navigate to="/" />} />
+      <Route path="/register" element={isAuthenticated && getProfileId() === 'ae576a80-ddb8-44f5-88f0-635ee39d559d' ? <RegisterPage /> : <Navigate to="/" />} />
+      <Route path="/todos" element={isAuthenticated ? <ToDoPage /> : <Navigate to="/" />} />
     </Routes>
   </BrowserRouter>
 );

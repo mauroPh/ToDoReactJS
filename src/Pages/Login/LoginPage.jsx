@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import iconToDo from '../../assets/todo.svg';
 import "./Login.css";
 import { getUserInfo } from "./LoginRepository";
+import { logout } from "../../services/auth";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -10,6 +11,8 @@ function Login() {
   const [usernameLabelPosition, setUsernameLabelPosition] = useState("top");
   const [passwordLabelPosition, setPasswordLabelPosition] = useState("top");
   const [redirectToToDoPage, setRedirectToToDoPage] = useState(false);
+
+  const history = useNavigate();
 
   const handleUsernameChange = (event) => {
     const value = event.target.value;
@@ -25,13 +28,15 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await getUserInfo(username, password);
-    setRedirectToToDoPage(true);
+    let response = await getUserInfo(username, password)
+    console.log("response = ", response)
+    if (response !== undefined) {
+      console.log('não sou undefined');
+      history('/todos');
+    } else {
+      logout();
+    }
   };
-
-  if (redirectToToDoPage) {
-    return <Navigate to="/todos" />;
-  }
 
   return (
     <div className="login-container">
@@ -55,12 +60,8 @@ function Login() {
             onChange={handlePasswordChange}
           />
         </label>
-        
-
           <div className='button-separator'></div>
           <button type="submit" className="login-button">Entrar</button>
-       
-       
       </form>
     </div>
   );

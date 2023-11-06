@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import AddTodoFormComponent from "../../components/AddToDoFormComponent/AddToDoFormComponent";
 import Header from "../../components/Header/header";
 import ToDoItemComponent from "../../components/ToDoItemComponent/ToDoItemComponent";
 import "./ToDo.css";
 import { addTodo, deleteTodo, getAllTodos, updateTodo } from "./ToDoRepository";
+import { logout } from "../../services/auth";
 
 function ToDoPage() {
   const [todos, setTodos] = useState([]);
-   const [reloadAdd, setReloadAdd] = useState([]);
+  const [reloadAdd, setReloadAdd] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 6;
+  const itemsPerPage = 12;
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showEmptyAlert, setShowEmptyAlert] = useState(false); 
+
+  const history = useNavigate();
 
   async function fetchTodos() {
     try {
@@ -21,6 +25,8 @@ function ToDoPage() {
       setTodos(todos);
     } catch (error) {
       console.error(error);
+      logout();
+      history('/');
     }
   }
 
