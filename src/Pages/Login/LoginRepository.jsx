@@ -6,9 +6,13 @@ async function getUserInfo(email, password) {
       email: email,
       password: password
     });
-    console.log("getUserInfo ", response.data);
+    
+    const profileId = response.data.result.profileId; 
+    
     localStorage.setItem('token', response.data.result.token);
     localStorage.setItem('email', response.data.result.username);
+    localStorage.setItem('profileId', profileId); 
+
     return response.data.result.token;
   } catch (error) {
     console.error(error);
@@ -18,4 +22,5 @@ async function getUserInfo(email, password) {
 export {
   getUserInfo
 };
+
 

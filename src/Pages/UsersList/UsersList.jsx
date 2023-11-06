@@ -5,6 +5,8 @@ import UserCardComponent from "../../components/UserCardComponent/UserCardCompon
 import RegisterPage from "../Register/RegisterPage";
 import { deleteUser, getAllUsers, updateUser } from "./UsersRepository";
 import "./Users.css";
+import Icon from '@mdi/react';
+import { mdiAccountPlusOutline } from '@mdi/js';
 
 function UsersListPage() {
   const [users, setUsers] = useState([]);
@@ -99,7 +101,7 @@ function UsersListPage() {
           />
         )}
         <button className="add-user-button" onClick={() => setShowRegisterPopup(true)}>
-          Adicionar usuário
+        <Icon path={mdiAccountPlusOutline} size={1} />
         </button>
         {showRegisterPopup && <RegisterPopup onClose={handleCloseRegisterPopup} />}
       </div>

@@ -7,6 +7,7 @@ const Header = ({ title, userEmail }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const user = {
     email: localStorage.getItem('email'),
+    profileId: localStorage.getItem('profileId'), 
   };
   const history = useNavigate();
 
@@ -23,8 +24,15 @@ const Header = ({ title, userEmail }) => {
 
   function handleUsersListPage() {
     setMenuOpen(false);
-    history('/users');
-    window.location.reload();
+
+    
+    if (user.profileId === "ae576a80-ddb8-44f5-88f0-635ee39d559d") {
+      history('/users');
+      window.location.reload();
+    } else {
+      
+      alert("Você não tem permissão para acessar esta página.");
+    }
   }
 
   return (
