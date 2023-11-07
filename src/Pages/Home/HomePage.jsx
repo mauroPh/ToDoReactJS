@@ -11,15 +11,15 @@ import Footer from '../../styles/styledComponents/Footer';
 const HomePage = () => {
     const items = [
         {
-            text: 'Sem uma boa organização, nos sentimos sobrecarregados e estressados,lutando para acompanhar nossas obrigações. Ao priorizar e organizar nossas tarefas, podemos reduzir o estresse, aumentar a produtividade e aproveitar nosso tempo de maneira mais eficaz. Organizar suas tarefas também permite definir metas e alcançar objetivos de maneira mais consistente. Em resumo, a organização é a chave para uma vida mais equilibrada e produtiva.',
+            text: 'Sem uma boa organização, nos sentimos sobrecarregados e estressados,lutando para acompanhar nossas obrigações. Em resumo, a organização é a chave para uma vida mais equilibrada e produtiva.',
             img: img1
         },
         {
-            text: 'Um aplicativo de lista de tarefas, ou "to-do app", é uma ferramenta poderosa para colocar a organização em prática. Com ele, você pode criar e editar suas tarefas de forma rápida e conveniente. Com a capacidade de acessar suas listas de tarefas em dispositivos móveis e computadores, você pode levar sua organização para qualquer lugar, tornando-a mais flexível e adaptável ao seu ritmo.',
+            text: 'Um aplicativo de lista de tarefas, ou "to-do app", é uma ferramenta poderosa para colocar a organização em prática. Com ele, você pode criar e editar suas tarefas de forma rápida e conveniente. Podendo ser acessado em qualquer lugar, a organização de suas tarefas se torna mais flexível e adaptável ao seu ritmo.',
             img: img2
         },
         {
-            text: 'Em um mundo cada vez mais acelerado, a simplicidade é fundamental. Um app todo simplifica a vida, permitindo que você mantenha todas as suas tarefas em um único lugar. Esqueça as listas de papel ou anotações espalhadas. Com um aplicativo de organização de tarefas, você pode centralizar todas as suas atividades em um local de fácil acesso. Isso não apenas economiza tempo, mas também ajuda a evitar esquecimentos e retrabalhos. Em última análise, um app todo é a ferramenta perfeita para ajudá-lo a conquistar sua lista de tarefas e tornar sua vida mais organizada e eficiente.',
+            text: 'Em um mundo cada vez mais acelerado, a simplicidade é fundamental. Simplifique sua vida, mantendo as suas tarefas em um único lugar. Sem listas de papel ou anotações perdidas. Torne sua vida e a de sua equipe mais organizada e eficiente.',
             img: img3
         }
     ];

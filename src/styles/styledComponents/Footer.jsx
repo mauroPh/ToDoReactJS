@@ -2,12 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
-background: linear-gradient(to top,#e60012, #ac000d, #d10011);
+  background: linear-gradient(to top,#e60012, #ac000d, #d10011);
   padding: 20px;
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
+  height: 50px;
+  z-index: 1000;
 
   .container {
     text-align: end;
