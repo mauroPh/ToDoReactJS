@@ -26,6 +26,7 @@ const PopupContent = styled.div`
   position: relative;
   border-radius: 30px;
   border: 1px solid #dadce0;
+  text-align: center;
 `;
 
 const Question = styled.p`

@@ -6,6 +6,7 @@ import img1 from '../../assets/1.jpeg';
 import img2 from '../../assets/2.jpeg';
 import img3 from '../../assets/3.jpeg';
 import iconToDo from '../../assets/lista-de-afazeres.png';
+import Footer from '../../styles/styledComponents/Footer';
 
 const HomePage = () => {
     const items = [
@@ -49,7 +50,9 @@ const HomePage = () => {
               </Carousel.Item>
             ))}
           </Carousel>
+          <Footer></Footer>
         </div>
+        
       );
     };
     

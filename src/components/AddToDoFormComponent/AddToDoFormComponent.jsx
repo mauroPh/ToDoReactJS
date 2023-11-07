@@ -69,7 +69,7 @@ function AddTodoFormComponent(props) {
          <ButtonClosePopup onClick={handleClosePopup}>
            <Icon path={mdiCloseCircle} size={0.8} color= 'darkgreen'></Icon> 
          </ButtonClosePopup>
-         <h3>Tarefa criada com sucesso!</h3>
+         <h5>Tarefa criada com sucesso!</h5>
        </div>
      </PopupSaveConfirmation>
       )}
@@ -79,7 +79,7 @@ function AddTodoFormComponent(props) {
          <ButtonClosePopup onClick={handleCloseErrorPopup}>
            <Icon path={mdiCloseCircle} size={0.8} color= 'darkred'></Icon> 
          </ButtonClosePopup>
-         <h3>A descrição não pode estar vazia.</h3>
+         <h5>A descrição não pode estar vazia.</h5>
        </div>
      </PopupAlert>
       )}

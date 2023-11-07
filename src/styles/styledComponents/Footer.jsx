@@ -2,19 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
-  background-color: #484848;
-  color: #fff;
-  padding: 20px 0;
+background: linear-gradient(to top,#e60012, #ac000d, #d10011);
+  padding: 20px;
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
 
   .container {
-    text-align: center;
+    text-align: end;
+    padding-right: 10px;
 
     .copyright {
       font-size: small;
+      align-self: right;
+      color: #fff;
     }
 
     a {
@@ -32,7 +34,7 @@ const Footer = () => (
   <StyledFooter>
     <div className="container">
       <small className="copyright">
-        Designed by <a href="https://www.linkedin.com/in/mauroph/" target="_blank" rel="noopener noreferrer">Mauro Philipe</a>
+        Designed by <a href="https://www.linkedin.com/in/mauroph/" target="_blank" rel="noopener noreferrer">Mauro Philipe®</a>
       </small>
     </div>
   </StyledFooter>

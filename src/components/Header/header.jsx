@@ -80,7 +80,7 @@ const Header = ({ title, userEmail }) => {
       )}
       {showPopup && (
        <PopupAlert>
-         <h3>Oops! Você não tem permissão.</h3>
+         <h4>Oops! Você não tem permissão.</h4>
        </PopupAlert>
       )}
       <h1 className="title">{title}</h1>

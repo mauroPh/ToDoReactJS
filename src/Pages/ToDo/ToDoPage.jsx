@@ -85,6 +85,7 @@ function ToDoPage() {
             <ToDoItemComponent
               key={todo.todoId}
               todo={todo}
+              className="todo-item"
               handleCheckboxChange={handleCheckboxChange}
               handleDelete={handleDelete}
               handleUpdate={handleUpdate}
@@ -102,7 +103,9 @@ function ToDoPage() {
         />
         <AddTodoFormComponent saveTodo={handleAddTodo} fetchTodos={fetchTodos} />
       </div>
+      
     </div>
+    
   );
 }
 
