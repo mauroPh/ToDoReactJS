@@ -513,6 +513,10 @@ select
   background-repeat: no-repeat
   background-size: cover
 
+@media (max-width: 1650px)
+  .container
+  height: 100%
+
 .carousel-control-prev,
 .carousel-control-next
   color: #fff
@@ -549,31 +553,52 @@ select
 
 @media (max-width: 1650px)
   .card
-    width: 80vw
-    height: 60%
+    margin: 0px
+    width: 100%
     padding: 20px
-
+    border-radius: 0px
+    
 .card-body
   display: flex
-  flex-direction: column
-  justify-content: space-between
+  flex-direction: row
+  justify-content: center
   align-items: center
   height: 100%
+  
 
-.card-text
-  margin: 0
-  animation: pulse 3s 
+.card-text-content
+  font-size: clamp(12px, 1vw, 1rem);
+  height: 10vw
+  padding: 10px
+  background: rgba(0, 0, 0, 0.2);
+  margin: 20px
+  display: flex
+  border-radius: 30px
+  flex-direction: column
+  justify-content: space-evenly
+  align-items: flex-start
+  animation: pulse 3s alternate infinite
 
+  @media (max-width: 1040px)
+    height: 100%
+
+.card-style-1
+  .card-body
+    flex-direction: row-reverse
+
+.card-style-2
+  .card-body
+    flex-direction: row
 
 .carousel-image
   box-shadow: 0 6px 4px  #484848
-  width: 350px;
-  height: 350px;
+  width: 400px;
+  height: auto;
   margin: 10px
   border-radius: 30px
   animation: pulse 3s 
   
-@media (max-width: 540px)
+@media (max-width: 840px)
  .carousel-image
     width: 100%;
     height: 100%;
