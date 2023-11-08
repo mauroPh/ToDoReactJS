@@ -113,7 +113,7 @@ body
 .menu-title
   background-color: transparent;
   color: #484848;
-  font-size: clamp(18px, 2vw, 1rem);
+  font-size: 18px;
   font-weight: bold
   border-radius: 10px
   margin: 10px;
@@ -124,7 +124,7 @@ body
   border-width: 3px;
   border-style: solid;
   border-color: rgba(3, 73, 251, 0.641);
-  font-size: clamp(12px, 2vw, 1rem);
+  font-size: 12px;
   width-min: 30vw;
   height-min: 30%
   display: flex;
@@ -508,8 +508,8 @@ select
     box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641)
 
 .carousel
+  background: linear-gradient(to top, lighten(#484848, 40%), lighten(#484848, 30%), lighten(#484848, 20%), lighten(#484848, 10%), #484848);
   overflow-x: auto
-  background: linear-gradient(to top, darken(#484848, 20%), darken(#484848, 10%), #484848, lighten(#484848, 10%), lighten(#484848, 20%));
   background-repeat: no-repeat
   background-size: cover
 
@@ -533,10 +533,10 @@ select
   background: linear-gradient(to top,#ac000d,#d10011 ,#e60012)
   box-shadow: 0 2px 4px rgba(3, 73, 251, 0.641)
   border-radius: 30px
-  font-size: clamp(22px, 2vw, 1rem)
+  font-size: clamp(18px, 2vw, 1rem)
   color: #fff
-  flex-direction: column
-  justify-content: center
+  flex-direction: row
+  justify-content: space-between
   align-items: center
   padding: 60px
   margin-left: 10%
@@ -566,6 +566,7 @@ select
 
 
 .carousel-image
+  box-shadow: 0 6px 4px  #484848
   width: 350px;
   height: 350px;
   margin: 10px

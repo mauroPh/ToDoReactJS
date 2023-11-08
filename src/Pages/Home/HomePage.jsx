@@ -15,7 +15,7 @@ const HomePage = () => {
             img: img1
         },
         {
-            text: 'Um aplicativo de lista de tarefas, ou "to-do app", é uma ferramenta poderosa para colocar a organização em prática. Com ele, você pode criar e editar suas tarefas de forma rápida e conveniente. Podendo ser acessado em qualquer lugar, a organização de suas tarefas se torna mais flexível e adaptável ao seu ritmo.',
+            text: 'Um aplicativo de lista de tarefas, ou "to-do app", é uma ferramenta poderosa para colocar a organização em prática. Com ele, você pode criar e organizar suas tarefas de forma rápida e adaptável ao seu ritmo.',
             img: img2
         },
         {
